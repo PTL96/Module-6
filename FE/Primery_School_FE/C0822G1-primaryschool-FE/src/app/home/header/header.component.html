@@ -1,0 +1,52 @@
+<body>
+<section class="header">
+  <nav>
+    <div class="logo">
+        <img class="animationTop delay-01" src="../../../assets/img/TFLBofi.png"/>
+
+    </div>
+    <div class="nav-links">
+
+      <ul>
+        <li style="margin-right: 100px">
+<!--          <form class="d-flex" style=" width: 500px; height: 40px">-->
+<!--            <input class="form-control me-2" style="border-radius: 15px" type="search" placeholder=" Tìm kiếm" aria-label="Search">-->
+<!--            <button class="btn btn-outline-danger" type="submit" style="width: 100px; border-radius: 15px">Tìm kiếm</button>-->
+<!--          </form>-->
+        </li>
+        <li class="animationTop delay-03"><a routerLink="/">TRANG CHỦ</a></li>
+        <li class="animationTop delay-05"><a routerLink="/student">HỌC SINH</a></li>
+        <li class="animationTop delay-07"><a routerLink="/teacher">GIÁO VIÊN</a></li>
+        <li class="animationTop delay-09"><a routerLink="/timetable">THỜI KHÓA BIỂU</a></li>
+<li class="animationTop delay-1">
+    <div>
+      <div class="dropdown">
+        <button class="btn btn-danger m-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-sharp fa-solid fa-user" style="width: 70px; height: 35px; padding-top: 10px"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" style="background-color: #f44336; cursor: pointer">
+          <li><a class="dropdown"><i class="fa-sharp fa-solid fa-key" ></i> Sửa mật khẩu</a></li>
+          <li><a class="dropdown" data-bs-toggle="modal" data-bs-target="#logout"><i class="fa-sharp fa-solid fa-right-to-bracket"></i> Đăng xuất</a></li>
+        </ul>
+      </div>
+    </div>
+</li>
+      </ul>
+    </div>
+
+  </nav>
+  <div class="text-box">
+    <h1 class="animationTop delay-12">Trường Tiểu Học C Zero Eight</h1>
+    <p class="animationTop delay-15">Là nơi có đội ngũ giáo viên được đào tạo chuyên nghiệp, có trách nhiệm và kinh nghiệm qua nhiều năm giảng
+      dạy</p>
+    <a routerLink="/login" class="hero-btn animationTop delay-17">Đăng Nhập</a>
+
+  </div>
+  <div class="scroll-to-top" *ngIf="pageYoffSet > 0">
+    <a class="btn" (click)="scrollToTop()" style="background-color: rgba(255,255,255,0.44)">
+      <i class="fas fa-angle-double-up" style="width: 30px; height: 50px; color: red; padding-top: 15px"></i>
+    </a>
+  </div>
+</section>
+</body>
+
