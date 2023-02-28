@@ -7,10 +7,11 @@ import { StudentCreateComponent } from './student-create/student-create.componen
 import { StudentUpdateComponent } from './student-update/student-update.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { StudentDeleteComponent } from './student-delete/student-delete.component';
+import { HomeroomClassListComponent } from './homeroom-class-list/homeroom-class-list.component';
 
 
 @NgModule({
-  declarations: [StudentListComponent, StudentCreateComponent, StudentUpdateComponent, StudentDetailComponent, StudentDeleteComponent],
+  declarations: [StudentListComponent, StudentCreateComponent, StudentUpdateComponent, StudentDetailComponent, StudentDeleteComponent, HomeroomClassListComponent],
   imports: [
     CommonModule,
     StudentRoutingModule
