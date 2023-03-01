@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { TimetableRoutingModule } from './timetable-routing.module';
 import { TimetableListComponent } from './timetable-list/timetable-list.component';
-import { TimetableTeacherListComponent } from './timetable-teacher-list/timetable-teacher-list.component';
+import { TimetableTeacherComponent } from './timetable-teacher/timetable-teacher.component';
 
 
 @NgModule({
-  declarations: [TimetableListComponent, TimetableTeacherListComponent],
+  declarations: [TimetableListComponent, TimetableTeacherComponent],
   imports: [
     CommonModule,
     TimetableRoutingModule

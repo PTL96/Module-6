@@ -78,29 +78,28 @@
         giao lưu với giáo viên nước ngoài để tăng sự phát triển toàn diện
         của trẻ</p>
     </div>
-    <div class="row">
-<!--         *ngFor="let item of pageBlog">-->
+    <div class="row" *ngFor="let item of pageBlog">
+      <div class="work-col">
+        <img class="zoom">{{item.image}}
+        <h3 class="zoom">{{item.title}}</h3>
+        <p class="zoom">{{item.content}}</p>
+        <p class="zoom">Ngày đăng: {{item.startDate}}</p>
+        <p class="zoom">Người đăng: {{item.poster}}</p>
+      </div>
+
 <!--      <div class="work-col">-->
-<!--        <img class="zoom">{{item.image}}-->
-<!--        <h3 class="zoom">{{item.title}}</h3>-->
-<!--        <p class="zoom">{{item.content}}</p>-->
-<!--        <p class="zoom">Ngày đăng: {{item.startDate}}</p>-->
-<!--        <p class="zoom">Người đăng: {{item.poster}}</p>-->
+<!--        <img class="zoom" src="https://i.imgur.com/7vIq21s.jpeg">-->
+<!--        <h3 class="zoom">Luyện code thiếu nhi</h3>-->
+<!--        <p class="zoom">Với việc CNTT ngày càng phát triển,-->
+<!--          nên việc rèn luyện tư duy code từ nhỏ cho trẻ là thực sự cần thiết</p>-->
 <!--      </div>-->
 
-      <div class="work-col">
-        <img class="zoom" src="https://i.imgur.com/7vIq21s.jpeg">
-        <h3 class="zoom">Luyện code thiếu nhi</h3>
-        <p class="zoom">Với việc CNTT ngày càng phát triển,
-          nên việc rèn luyện tư duy code từ nhỏ cho trẻ là thực sự cần thiết</p>
-      </div>
-
-      <div class="work-col">
-        <img class="zoom" src="https://toplist.vn/images/800px/truong-quoc-te-a-chau-bac-tieu-hoc-ips-496655.jpg">
-        <h3 class="zoom">Cùng chơi giải đố</h3>
-        <p class="zoom">Ngòai giờ học căng thăng,
-          tổ chức trò chơi ngoại khóa cho trẻ.</p>
-      </div>
+<!--      <div class="work-col">-->
+<!--        <img class="zoom" src="https://toplist.vn/images/800px/truong-quoc-te-a-chau-bac-tieu-hoc-ips-496655.jpg">-->
+<!--        <h3 class="zoom">Cùng chơi giải đố</h3>-->
+<!--        <p class="zoom">Ngòai giờ học căng thăng,-->
+<!--          tổ chức trò chơi ngoại khóa cho trẻ.</p>-->
+<!--      </div>-->
     </div>
   </section>
 
