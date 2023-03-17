@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {ViewportScroller} from "@angular/common";
 
 @Component({
   selector: 'app-footer',
@@ -11,5 +12,6 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
 }

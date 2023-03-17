@@ -1,5 +1,4 @@
 <body>
-
 <div class="header">
 <div class="container">
 <div class="navbar">
@@ -11,7 +10,7 @@
       <li><a href="#">Trang Chủ</a></li>
       <li><a href="#">Sản Phẩm</a></li>
       <li><a href="#"></a>Liên Hệ</li>
-      <li><a href="#"></a>Tư Vấn</li>
+      <li><a href="#"></a>Lịch Sử Mua Hàng</li>
       <li><a routerLink="/security">Đăng Nhập</a></li>
     </ul>
   </nav>
@@ -32,7 +31,15 @@
     <div class="col-2">
       <img src="../../../assets/img/background-removebg-preview.png" class="zoom1"/></div>
   </div>
+
 </div>
+
+  <div class="scroll-to-top" *ngIf="pageYoffSet > 0">
+    <a class="btn" (click)="scrollToTop()" style="background-color: #FF523b; border-radius: 50%;height: 20px; cursor: pointer">
+      <i class="fas fa-angle-double-up" ></i>
+    </a>
+  </div>
+
 </div>
 
 </body>

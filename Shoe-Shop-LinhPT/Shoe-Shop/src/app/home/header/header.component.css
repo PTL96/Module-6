@@ -79,3 +79,8 @@ p{
 .zoom1:hover{
   transform: scale(1.3);
 }
+.scroll-to-top{
+  position: fixed;
+  z-index: 1;
+  margin-left: 94%;
+}
