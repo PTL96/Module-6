@@ -17,18 +17,27 @@ public class AccountPrinciple implements UserDetails {
     private String name;
     private String email;
     private String avatar;
+    private String idCard;
+    private String address;
+    private String phoneNumber;
+    private String dateOfBirth;
     private Collection<? extends GrantedAuthority> roles;
+
 
     public AccountPrinciple() {
     }
 
-    public AccountPrinciple(Long id, String username, String password, String name, String email, String avatar, Collection<? extends GrantedAuthority> roles) {
+    public AccountPrinciple(Long id, String username, String password, String name, String email, String avatar, String idCard, String address, String phoneNumber, String dateOfBirth, Collection<? extends GrantedAuthority> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
         this.avatar = avatar;
+        this.idCard = idCard;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
         this.roles = roles;
     }
 
@@ -72,27 +81,44 @@ public class AccountPrinciple implements UserDetails {
         this.avatar = avatar;
     }
 
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public Collection<? extends GrantedAuthority> getRoles() {
         return roles;
     }
 
     public void setRoles(Collection<? extends GrantedAuthority> roles) {
         this.roles = roles;
-    }
-
-    public static AccountPrinciple build(Account account) {
-        List<GrantedAuthority> authorityList = account.getRoleSet().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-                .collect(Collectors.toList());
-        return new AccountPrinciple(
-                account.getAccountId(),
-                account.getUserName(),
-                account.getPassword(),
-                account.getName(),
-                account.getEmail(),
-                account.getAvatar(),
-                authorityList
-        );
     }
 
     @Override
@@ -128,5 +154,24 @@ public class AccountPrinciple implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public static AccountPrinciple build(Account account) {
+        List<GrantedAuthority> authorityList = account.getRoleSet().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+                .collect(Collectors.toList());
+        return new AccountPrinciple(
+                account.getAccountId(),
+                account.getUsername(),
+                account.getPassword(),
+                account.getName(),
+                account.getEmail(),
+                account.getAvatar(),
+                account.getIdCard(),
+                account.getAddress(),
+                account.getDateOfBirth(),
+                account.getPhoneNumber(),
+                authorityList
+        );
     }
 }

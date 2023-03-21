@@ -20,6 +20,22 @@ public class AccountService implements IAccountService {
     public Optional<Account> findByUsername(String username) {
         return iAccountRepository.findByUsername(username);
     }
+
+    @Override
+    public boolean existsAccountByEmail(String email) {
+        return iAccountRepository.existsAccountByEmail(email);
+    }
+
+    @Override
+    public boolean existsAccountByUsername(String username) {
+        return iAccountRepository.existsAccountByUsername(username);
+    }
+
+    @Override
+    public void save(Account account) {
+        iAccountRepository.save(account);
+    }
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 

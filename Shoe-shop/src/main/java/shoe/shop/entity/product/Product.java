@@ -1,6 +1,7 @@
 package shoe.shop.entity.product;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,17 +20,19 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
     private String productName;
+    @Column(columnDefinition = "longtext")
     private String description;
     private Double price;
     @Column(columnDefinition = "longtext")
     private String avatar;
+    private int quantity;
     private boolean flagDelete;
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
-    @OneToMany(mappedBy = "product")
-    @JsonBackReference
-    Set<WareHouse> wareHouseSet;
-    @OneToMany(mappedBy = "products")
-    @JsonBackReference
-    Set<SizeProduct> sizeProductSet;
+    @ManyToOne
+    private Size size;
+
+
+
 }

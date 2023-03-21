@@ -30,12 +30,17 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
     @Column(columnDefinition = "varchar(45)", unique = true)
-    private String userName;
+    private String username;
     @JsonIgnore
     private String password;
     @Column(columnDefinition = "varchar(45)", unique = true)
     private String email;
     private String name;
+    @Column(columnDefinition = "varchar(12)", unique = true)
+    private String idCard;
+    private String address;
+    private String phoneNumber;
+    private String dateOfBirth;
     private boolean flagDelete;
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonBackReference

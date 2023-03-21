@@ -9,14 +9,13 @@ import shoe.shop.entity.account.Account;
 import java.util.Optional;
 @Repository
 public interface IAccountRepository extends JpaRepository<Account, Long> {
-
     Boolean existsAccountByUsername(String username);
 
     Boolean existsAccountByEmail(String email);
 
-
-    @Query(value = "select * from account where user_name = :username", nativeQuery = true)
+    @Query(value = "select * from account where username = :username", nativeQuery = true)
     Optional<Account> findByUsername(@Param("username") String username);
+
     @Query(value = "select * from account where account_id = :accountId", nativeQuery = true)
     Account findByUserId(@Param("accountId") Long accountId);
 

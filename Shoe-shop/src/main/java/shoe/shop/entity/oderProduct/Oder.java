@@ -23,8 +23,5 @@ public class Oder {
     private String oderDate;
     @ManyToOne
     private Account accounts;
-    @OneToMany(mappedBy = "oder")
-    @JsonBackReference
-    Set<Payment> paymentSet;
 
 }
