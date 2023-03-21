@@ -1,68 +1,39 @@
-<body style="height: 100vh">
-<div class="small-container cart-page">
+
+<div class="small-container cart-page" style="min-height: 60vh">
   <table>
+<thead>
     <tr>
       <th>Sản phẩm</th>
       <th>Số lượng</th>
       <th>Size</th>
       <th>Giá tiền</th>
     </tr>
-
-    <tr>
-      <td>
-        <div class="cart-info">
-          <img src="../../../assets/img/Nike-2.jpg"/>
-          <div>
-            <p>Nike TF 1</p>
-            <small>3.650.000đ</small><br>
-            <a href="#">Xóa khỏi giỏ</a>
+</thead>
+  <tbody *ngIf="items.length > 0; else emptyCart">
+      <tr *ngFor="let temp of items">
+        <td>
+          <div class="cart-info">
+            <img src="{{temp.avatar}}"/>
+            <div>
+              <p>{{temp.productName}}</p>
+              <small>{{temp.price}}</small><br>
+              <a (click)="deleteItems(temp.productId)" style="cursor: pointer">Xóa khỏi giỏ</a>
+            </div>
           </div>
-        </div>
-      </td>
-      <td><input type="number" value="1"></td>
-      <td>40</td>
-      <td>3.650.000đ</td>
-    </tr>
-
-    <tr>
-      <td>
-        <div class="cart-info">
-          <img src="../../../assets/img/Nike-3.jpg"/>
-
-          <div>
-            <p>Nike TF 2</p>
-            <small>2.650.000đ</small><br>
-            <a href="#">Xóa khỏi giỏ</a>
-          </div>
-        </div>
-      </td>
-      <td><input type="number" value="1"></td>
-      <td>40</td>
-      <td>2.650.000đ</td>
-    </tr>
-
-    <tr>
-      <td>
-        <div class="cart-info">
-          <img src="../../../assets/img/Nike-4.jpg"/>
-
-          <div>
-            <p>Nike TF 3</p>
-            <small>1.650.000đ</small><br>
-            <a href="#">Xóa khỏi giỏ</a>
-          </div>
-        </div>
-      </td>
-      <td><input type="number" value="1"></td>
-      <td>40</td>
-      <td>1.650.000đ</td>
-    </tr>
+        </td>
+        <td><input type="number" value="1"></td>
+        <td>40</td>
+        <td>3.650.000đ</td>
+      </tr>
+  </tbody>
   </table>
+
+
   <div class="total-price">
     <table>
       <tr>
         <td>Thành tiền</td>
-       <td>7.950.000đ</td>
+        <td>7.950.000đ</td>
       </tr>
       <tr>
         <td>VAT</td>
@@ -74,6 +45,10 @@
       </tr>
     </table>
   </div>
-  <a href="#" class="btn" style="float: right">Thanh toán</a>
+   <a href="#" class="btn1" style="float: right">Thanh toán</a>
+   <a routerLink="/" class="btn" style="float: right; margin-right: 95px" (click)="scrollProductBack()">Mua tiếp</a>
 </div>
-</body>
+
+<ng-template #emptyCart>
+  <h3 style="color: red; text-align: center">Chưa có sản phẩm nào trong giỏ hàng <span style="font-size: 35px">😢</span></h3>
+</ng-template>

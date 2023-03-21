@@ -1,11 +1,11 @@
 <div class="small-container single-product">
   <div class="row">
     <div class="col-2">
-      <img src="../../../assets/img/Nike-2.jpg" width="85%" height="85%"/>
+      <img [src]="temp.avatar" width="85%" height="75%"/>
     </div>
     <div class="col-2">
-      <h1>Nike Brand F1</h1>
-      <h3 style="color: red">2.650.000đ</h3>
+      <h1>{{temp.productName}}</h1>
+      <h3 style="color: red">{{temp.price}}</h3>
       <select>
         <option>Chọn size</option>
         <option>37</option>
@@ -17,12 +17,10 @@
         <option>43</option>
       </select>
       <input type="number" value="1">
-      <a href="" class="btn">Thêm vào giỏ</a>
-      <h3>Chi tiết sản phẩm</h3>
-      <p>Nike Air Force 1 High Sculpt kiểm tra tất cả các hộp của bạn.
-        Cổ áo điêu khắc và dây đeo mắt cá chân được loại bỏ hợp lý hóa
-        vẻ ngoài của những chiếc vòng mang tính biểu tượng.
-        Chất liệu da mềm và có vân nhẹ mang lại cảm giác cao cấp, phá cách một cách đẹp mắt.</p>
+      <a class="btn" routerLink="/cart" (click)="pushProduct(temp)">Thêm vào giỏ</a>
+      <a href="" class="btn1" (click)="scrollProduct()">Quay lại</a>
+      <h3>{{temp.productName}}</h3>
+      <p>{{temp.description}}</p>
     </div>
   </div>
 </div>

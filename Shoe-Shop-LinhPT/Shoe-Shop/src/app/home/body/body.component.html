@@ -1,7 +1,7 @@
 <body style="min-height: 210vh">
 <div class="category">
   <div class="small-container">
-    <div class="row">
+    <div class="row zoom">
       <div class="col-3">
         <img src="../../../assets/img/category-1.jpg"></div>
       <div class="col-3">
@@ -13,141 +13,63 @@
 </div>
 
 <div class="small-container">
-  <div class="row row-2">
-    <h2 class="title">Sản Phẩm Của Chúng Tôi</h2>
-    <select>
-      <option>Tất cả</option>
-      <option>Hàng hot</option>
-      <option>Hàng mới</option>
-      <option>Nike</option>
-      <option>Adidas</option>
+  <h2 class="title zoom">Sản Phẩm Của Chúng Tôi</h2>
+  <div style="margin-left: 64%; display: flex">
+    <select style="margin-right: 15px" [(ngModel)]="category" (change)="getAllProduct(size)">
+      <option value="">Tất cả</option>
+      <option *ngFor="let item of categoryList" [value]="item.categoryName" >{{item.categoryName}}</option>
     </select>
-  </div>
-</div>
-
-  <div class="row">
-<div class="card col-3">
-  <a routerLink="/home/detail">
-<div class="my-card" style="margin-left: 60px">
-  <img src="../../../assets/img/Nike-2.jpg" class="my-card-img"/>
-  <div class="my-card-body">
-<h1 class="my-card-title">NIKE  F1</h1>
-    <h4 style="margin-left: 10px; color: black; padding-top: 20px">2.150.000đ</h4>
-    <p class="my-card-subtitle">Thể hiện sự hài hòa giữa các chất liệu</p>
-    <button class="my-card-btn" style="margin-left: 10px">Mua ngay</button>
-  </div>
-</div>
-
-  </a>
-</div>
-
-<div class="card col-3">
-  <div class="my-card" style="margin-left: 60px">
-    <img src="../../../assets/img/Nike-3.jpg" class="my-card-img"/>
-    <div class="my-card-body">
-      <h1 class="my-card-title">NIKE  F1</h1>
-      <h4 style="margin-left: 10px; color: black; padding-top: 20px">2.150.000đ</h4>
-      <p class="my-card-subtitle">Thể hiện sự hài hòa giữa các chất liệu</p>
-      <button class="my-card-btn" style="margin-left: 10px">Mua ngay</button>
+    <div class="animationTop delay-02 form">
+      <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Bạn cần gì ?" [(ngModel)]="name">
+      <button type="submit" (click)="getAllProduct(size)">Tìm kiếm</button>
     </div>
   </div>
 </div>
+<div>
+  <div style="margin-top: 10px">
+    <div class="row">
+      <div class="card col-3" *ngFor="let item of pageSize">
 
-<div class="card col-3">
-  <div class="my-card" style="margin-left: 60px">
-    <img src="../../../assets/img/Nike-4.jpg" class="my-card-img"/>
-    <div class="my-card-body">
-      <h1 class="my-card-title">NIKE  F1</h1>
-      <h4 style="margin-left: 10px; color: black; padding-top: 20px">2.150.000đ</h4>
-      <p class="my-card-subtitle">Thể hiện sự hài hòa giữa các chất liệu</p>
-      <button class="my-card-btn" style="margin-left: 10px">Mua ngay</button>
+          <div class="my-card" style="margin-left: 60px">
+            <img [src]="item.avatar" class="my-card-img"/>
+            <div class="my-card-body">
+              <h6 class="my-card-title">{{item.productName | slice:0:10}}...</h6>
+              <!--    <i class="fa-thin fa-badge">Giảm giá</i>-->
+              <h3
+                style="margin-left: 10px; color: red; padding-top: 20px">{{item.price | currency:'VND':'symbol-narrow':'1.0-0'}}</h3>
+              <p class="my-card-subtitle">{{item.description | slice: 0: 100}}...<span
+                style="color: red; display: inline-block">Xem thêm</span></p>
+              <a [routerLink]="['/detail',item.productId]">
+              <button class="my-card-btn" style="margin-left: 10px">Xem chi tiết</button>
+              </a>
+            </div>
+          </div>
+
+      </div>
     </div>
+  </div>
+  <div>
+    <a style="cursor: pointer; margin-left: 48%; color: #f44336; text-decoration: none" type="button"
+       (click)="getAllProduct(size+3)" *ngIf="!last">
+      <i class="fas fa-angle-double-down" style="font-size: 30px"></i><br>
+    </a>
+    <a style="cursor: pointer; margin-left: 48%; color: #f44336; text-decoration: none" type="button"
+       (click)="getAllProduct(size=9)" *ngIf="last">
+      <i class="fas fa-angle-double-up" style="font-size: 30px" (click)="scrollProduct()"></i><br>
+    </a>
   </div>
 </div>
-
-    <div class="card col-3">
-      <div class="my-card" style="margin-left: 60px">
-        <img src="../../../assets/img/Nike-2.jpg" class="my-card-img"/>
-        <div class="my-card-body">
-          <h1 class="my-card-title">NIKE  F1</h1>
-          <h4 style="margin-left: 10px; color: black; padding-top: 20px">2.150.000đ</h4>
-          <p class="my-card-subtitle">Thể hiện sự hài hòa giữa các chất liệu</p>
-          <button class="my-card-btn" style="margin-left: 10px">Mua ngay</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card col-3">
-      <div class="my-card" style="margin-left: 60px">
-        <img src="../../../assets/img/Nike-3.jpg" class="my-card-img"/>
-        <div class="my-card-body">
-          <h1 class="my-card-title">NIKE  F1</h1>
-          <h4 style="margin-left: 10px; color: black; padding-top: 20px">2.150.000đ</h4>
-          <p class="my-card-subtitle">Thể hiện sự hài hòa giữa các chất liệu</p>
-          <button class="my-card-btn" style="margin-left: 10px">Mua ngay</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card col-3">
-      <div class="my-card" style="margin-left: 60px">
-        <img src="../../../assets/img/Nike-4.jpg" class="my-card-img"/>
-        <div class="my-card-body">
-          <h1 class="my-card-title">NIKE  F1</h1>
-          <h4 style="margin-left: 10px; color: black; padding-top: 20px">2.150.000đ</h4>
-          <p class="my-card-subtitle">Thể hiện sự hài hòa giữa các chất liệu</p>
-          <button class="my-card-btn" style="margin-left: 10px">Mua ngay</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card col-3">
-      <div class="my-card" style="margin-left: 60px">
-        <img src="../../../assets/img/Nike-2.jpg" class="my-card-img"/>
-        <div class="my-card-body">
-          <h1 class="my-card-title">NIKE  F1</h1>
-          <h4 style="margin-left: 10px; color: black; padding-top: 20px">2.150.000đ</h4>
-          <p class="my-card-subtitle">Thể hiện sự hài hòa giữa các chất liệu</p>
-          <button class="my-card-btn" style="margin-left: 10px">Mua ngay</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card col-3">
-      <div class="my-card" style="margin-left: 60px">
-        <img src="../../../assets/img/Nike-3.jpg" class="my-card-img"/>
-        <div class="my-card-body">
-          <h1 class="my-card-title">NIKE  F1</h1>
-          <h4 style="margin-left: 10px; color: black; padding-top: 20px">2.150.000đ</h4>
-          <p class="my-card-subtitle">Thể hiện sự hài hòa giữa các chất liệu</p>
-          <button class="my-card-btn" style="margin-left: 10px">Mua ngay</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card col-3">
-      <div class="my-card" style="margin-left: 60px">
-        <img src="../../../assets/img/Nike-4.jpg" class="my-card-img"/>
-        <div class="my-card-body">
-          <h1 class="my-card-title">NIKE  F1</h1>
-          <h4 style="margin-left: 10px; color: black; padding-top: 20px">2.150.000đ</h4>
-          <p class="my-card-subtitle">Thể hiện sự hài hòa giữa các chất liệu</p>
-          <button class="my-card-btn" style="margin-left: 10px">Mua ngay</button>
-        </div>
-      </div>
-    </div>
-
-  </div>
 
 <div class="offer">
   <div class="small-container">
     <div class="row">
       <div class="col-2">
 
-        <img src="../../../assets/img/Nike-16-removebg-preview.png" class="offer-img"/></div>
+        <img src="../../../assets/img/Nike-16-removebg-preview.png" class="offer-img zoom"/></div>
       <div class="col-2">
-        <h1>NIKE BRAND F1</h1>
-        <small>Được tạo ra cho gỗ cứng nhưng được sử dụng trên đường phố,
+        <h1 class="zoom">NIKE BRAND F1</h1>
+        <small class="zoom">Được tạo ra cho gỗ cứng nhưng được sử dụng trên đường phố,
           Dunk Low cổ điển của chúng tôi trở lại với lớp phủ sắc nét và đồ họa Nike cổ điển.
           Biểu tượng bóng rổ này truyền cảm hứng của thập niên 90 với sự kết hợp giữa áo ba lỗ
           và áo jersey ở phần trên mềm mại, thoải mái và bền bỉ. Công nghệ giày dép hiện đại giúp mang
@@ -162,16 +84,16 @@
   <div class="small-container">
     <div class="row">
       <div class="col-5">
-        <img src="../../../assets/img/logo-godrej.png"/>
+        <img src="../../../assets/img/logo-godrej.png" class="zoom"/>
       </div>
       <div class="col-5">
-        <img src="../../../assets/img/logo-oppo.png"/></div>
+        <img src="../../../assets/img/logo-oppo.png" class="zoom"/></div>
       <div class="col-5">
-        <img src="../../../assets/img/logo-paypal.png"/></div>
+        <img src="../../../assets/img/logo-paypal.png" class="zoom"/></div>
       <div class="col-5">
-        <img src="../../../assets/img/logo-philips.png"/></div>
+        <img src="../../../assets/img/logo-philips.png" class="zoom"/></div>
       <div class="col-5">
-        <img src="../../../assets/img/logo-coca-cola.png"/>
+        <img src="../../../assets/img/logo-coca-cola.png" class="zoom"/>
       </div>
     </div>
   </div>

@@ -6,17 +6,21 @@ import { HeaderComponent } from './header/header.component';
 import { BodyComponent } from './body/body.component';
 import { FooterComponent } from './footer/footer.component';
 import { ShoeDetailComponent } from './shoe-detail/shoe-detail.component';
+import { ShoeCreateComponent } from './shoe-create/shoe-create.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [HeaderComponent, BodyComponent, FooterComponent, ShoeDetailComponent],
+  declarations: [HeaderComponent, BodyComponent, FooterComponent, ShoeDetailComponent, ShoeCreateComponent],
   exports: [
     HeaderComponent,
     FooterComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class HomeModule { }

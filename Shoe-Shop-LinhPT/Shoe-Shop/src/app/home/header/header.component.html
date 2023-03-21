@@ -4,32 +4,47 @@
 <div class="navbar">
   <div class="logo">
 
-    <img src="../../../assets/img/logo.png"  width="125px"/></div>
+    <img src="../../../assets/img/logo.png"  width="125px" class="animationTop delay-01"/></div>
   <nav>
     <ul>
-      <li><a href="#">Trang Chủ</a></li>
-      <li><a href="#">Sản Phẩm</a></li>
-      <li><a href="#"></a>Liên Hệ</li>
-      <li><a href="#"></a>Lịch Sử Mua Hàng</li>
-      <li><a routerLink="/security">Đăng Nhập</a></li>
+
+      <li class="animationTop delay-03"><a routerLink="/">Trang Chủ</a></li>
+      <li class="animationTop delay-03"><a routerLink="/home/create">Thêm Mới</a></li>
+      <li class="animationTop delay-04"><a href="#"></a>Lịch Sử Mua Hàng</li>
+      <li class="animationTop delay-05"><a routerLink="/security" *ngIf="!isLoggedIn">Đăng Nhập</a></li>
+      <li>
+        <div class="dropdown" *ngIf="isLoggedIn">
+
+          <button class="dropbtn">{{user.name}}<i class="fa-solid fa-angle-down"></i></button>
+          <div class="dropdown-content">
+<!--            <img src="{{user?.avatar}}" style="width: 40px; background-image: none; border-radius: 50%; height: 40px" height="24" width="24" >-->
+            <a href="#">Thông tin cá nhân</a>
+            <a href="#">Đổi mật khẩu</a>
+            <a (click)="logout()">Đăng xuất</a>
+          </div>
+        </div>
     </ul>
   </nav>
 <a routerLink="/cart">
-  <img src="../../../assets/img/cart.png" width="30px" height="30px"/>
+  <img src="../../../assets/img/cart.png" width="30px" height="30px" class="animationTop delay-06"/>
 </a>
 </div>
 
   <div class="row">
     <div class="col-2">
-      <h1>Phong Cách Người Dẫn Đầu<br>
+      <h1 class="animationTop delay-07">Phong Cách Người Dẫn Đầu<br>
       Nền Tảng Cho Sự Thăng Hoa !
       </h1>
-      <p>Thời trang có thể mua được nhưng phong cách phải là điều sẵn có.
+      <p class="animationTop delay-08">Thời trang có thể mua được nhưng phong cách phải là điều sẵn có.
         Hãy tận hưởng việc diện đồ là nghệ thuật đích thực.</p>
-      <a href="#" class="btn">Mua Ngay &#8594;</a>
+      <a href="#" class="btn animationTop delay-09">Mua Ngay &#8594;</a>
     </div>
     <div class="col-2">
-      <img src="../../../assets/img/background-removebg-preview.png" class="zoom1"/></div>
+      <div class="zoom1">
+      <img src="../../../assets/img/background-removebg-preview.png" class="animationTop delay-10"/>
+      </div>
+    </div>
+
   </div>
 
 </div>

@@ -1,0 +1,41 @@
+<body>
+<div class="wrapper">
+  <div class="title">
+    THÊM MỚI SẢN PHẨM
+  </div>
+  <form class="form" [formGroup]="createForm" (ngSubmit)="createProduct()">
+    <div class="inputfield">
+      <label>Tên sản phẩm</label>
+      <input type="text" class="input" placeholder="Tên sản phẩm" formControlName="productName">
+    </div>
+    <img [src]="selectedFileUrl" *ngIf="selectedFileUrl">
+    <div class="inputfield">
+      <label>Hình ảnh</label>
+      <input (change)="showPreview($event)" type="file" class="input" >
+    </div>
+    <div class="inputfield">
+      <label>Giá sản phẩm</label>
+      <input type="number" class="input" placeholder="Giá sản phẩm" value="0" formControlName="price">
+    </div>
+
+    <div class="inputfield">
+      <label>Loại sản phẩm</label>
+      <div class="custom_select">
+        <select formControlName="category">
+          <option value="">Chọn loại sản phẩm</option>
+          <option  *ngFor="let item of category" [ngValue]="item">{{item.categoryName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="inputfield">
+      <label>Mô tả</label>
+      <textarea class="textarea" placeholder="Mô tả" formControlName="description"></textarea>
+    </div>
+
+    <div class="inputfield">
+      <button type="submit" value="Thêm mới" class="btn">Thêm mới</button>
+    </div>
+  </form>
+
+</div>
+</body>

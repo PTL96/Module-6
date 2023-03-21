@@ -64,6 +64,15 @@ th:last-child{
 }
 .btn{
   display: inline-block;
+  background: #2fb1bd;
+  color: #fff;
+  padding: 8px 30px;
+  margin: 30px 0;
+  border-radius: 30px;
+  transition: background 0.5s;
+}
+.btn1{
+  display: inline-block;
   background: #FF523b;
   color: #fff;
   padding: 8px 30px;
