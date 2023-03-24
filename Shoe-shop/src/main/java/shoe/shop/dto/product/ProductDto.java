@@ -2,11 +2,6 @@ package shoe.shop.dto.product;
 
 import shoe.shop.entity.product.Category;
 
-import shoe.shop.entity.product.WareHouse;
-
-import javax.validation.constraints.*;
-import java.util.Set;
-
 public class ProductDto {
     private Long productId;
 //    @NotBlank(message = "Bạn chưa nhập tên sản phẩm")

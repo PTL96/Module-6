@@ -1,5 +1,8 @@
 package shoe.shop.dto.product;
 
+import shoe.shop.entity.account.Account;
+import shoe.shop.entity.product.Product;
+
 public interface ProductView {
     Long getProductId();
     String getProductName();
@@ -7,7 +10,9 @@ public interface ProductView {
     String getDescription();
     Double getPrice();
     String getAvatar();
-    public int getQuantity();
-    boolean isFlagDelete();
+    Double getQuantity();
+    Account getAccount();
+    Product getProduct();
+    float getTotalPrice();
 
-    }
+}

@@ -23,7 +23,7 @@ public class SizeController {
     public ResponseEntity<List<Size>> getAll() {
         List<Size> sizeList = sizeService.getAllSize();
         if (sizeList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(sizeList, HttpStatus.OK);
     }

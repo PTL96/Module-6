@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import shoe.shop.entity.product.Product;
 
 import javax.persistence.*;
 
@@ -13,13 +12,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Setter
 @Getter
-public class PurchaseHistory {
+public class OderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long historyId;
-    private int quantity;
+    private Long oderDetailId;
     @ManyToOne
+    @JoinColumn(name = "oder_id")
     private Oder oder;
-    @ManyToOne
-    private Product product;
 }

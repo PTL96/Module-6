@@ -1,6 +1,4 @@
 package shoe.shop.entity.product;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +17,4 @@ public class Size {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sizeId;
     private Integer sizeNumber;
-
 }

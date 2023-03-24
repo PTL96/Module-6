@@ -87,3 +87,32 @@ a{
   text-decoration: none;
   color: #555;
 }
+.btn3{
+  display: inline-block;
+  background: #FF523b;
+  color: #fff;
+  padding: 4px 7px;
+ margin-right: 10px;
+  border-radius: 30px;
+  transition: background 0.5s;
+  cursor: pointer;
+}
+.btn4{
+  display: inline-block;
+  background: #FF523b;
+  color: #fff;
+  padding: 4px 7px;
+  border-radius: 30px;
+  transition: background 0.5s;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.quantity {
+  border: 1px solid #ff523b;
+  padding: 5px;
+}
+
+.quantity:focus {
+  outline: none;
+}

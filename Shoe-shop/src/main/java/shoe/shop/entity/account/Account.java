@@ -3,20 +3,14 @@ package shoe.shop.entity.account;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import shoe.shop.entity.oderProduct.Oder;
+
+
+
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
 @Table(name = "account", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
                 "username"
@@ -48,9 +42,121 @@ public class Account {
     private Set<Role> roleSet;
     @Lob
     private String avatar;
-    @OneToMany(mappedBy = "accounts")
-    @JsonBackReference
-    Set<Oder> oderSet;
 
+    public Account() {
+    }
 
+    public Account(Long accountId, String username, String password, String email, String name, String idCard, String address, String phoneNumber, String dateOfBirth, boolean flagDelete, Set<Role> roleSet, String avatar) {
+        this.accountId = accountId;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.idCard = idCard;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.flagDelete = flagDelete;
+        this.roleSet = roleSet;
+        this.avatar = avatar;
+    }
+
+    public Account(String username, String encode, String name, String email) {
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public boolean isFlagDelete() {
+        return flagDelete;
+    }
+
+    public void setFlagDelete(boolean flagDelete) {
+        this.flagDelete = flagDelete;
+    }
+
+    public Set<Role> getRoleSet() {
+        return roleSet;
+    }
+
+    public void setRoleSet(Set<Role> roleSet) {
+        this.roleSet = roleSet;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 }

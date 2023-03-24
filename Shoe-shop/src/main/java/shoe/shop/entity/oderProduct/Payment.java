@@ -17,6 +17,9 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
     private String paymentMethod;
+    private String datePayment;
     @ManyToOne
+    @JoinColumn(name = "oder_id")
     private Oder oder;
+
 }

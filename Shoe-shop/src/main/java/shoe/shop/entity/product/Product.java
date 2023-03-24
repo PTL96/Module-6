@@ -1,14 +1,13 @@
 package shoe.shop.entity.product;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shoe.shop.entity.oderProduct.Oder;
 
 import javax.persistence.*;
-import java.util.Set;
+
 
 @Entity
 @NoArgsConstructor
@@ -25,14 +24,10 @@ public class Product {
     private Double price;
     @Column(columnDefinition = "longtext")
     private String avatar;
-    private int quantity;
     private boolean flagDelete;
+    private int quantity;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    @ManyToOne
-    private Size size;
-
-
 
 }

@@ -67,22 +67,22 @@ public class AuthRestController {
                 roles));
     }
 
-//    @PostMapping("/sign-up")
-//    public ResponseEntity<?> register(@Valid @RequestBody SignUpForm signUpForm) {
-//        if (iAccountService.existsAccountByUsername(signUpForm.getUsername())) {
-//            return new ResponseEntity<>(new ResponseMessage("Tên đăng nhập " + signUpForm.getUsername() +
-//                    " đã được sử dụng, vui lòng chọn tên khác"), HttpStatus.BAD_REQUEST);
-//        }
-//        if (iAccountService.existsAccountByEmail(signUpForm.getEmail())) {
-//            return new ResponseEntity<>(new ResponseMessage("Email đã tồn tại"), HttpStatus.BAD_REQUEST);
-//        }
-//        Account account = new Account(signUpForm.getUsername(), passwordEncoder.encode(signUpForm.getPassword()), signUpForm.getName(), signUpForm.getEmail());
-//        Set<Role> roles = new HashSet<>();
-//        Role role = iRoleService.findByName(RoleName.ROLE_CUSTOMER).orElseThrow(() -> new RuntimeException("Role not found"));
-//        roles.add(role);
-//        account.setRoleSet(roles);
-//        iAccountService.save(account);
-//        return new ResponseEntity<>(new ResponseMessage("Đăng kí thành công"), HttpStatus.OK);
-//    }
+    @PostMapping("/sign-up")
+    public ResponseEntity<?> register(@Valid @RequestBody SignUpForm signUpForm) {
+        if (iAccountService.existsAccountByUsername(signUpForm.getUsername())) {
+            return new ResponseEntity<>(new ResponseMessage("Tên đăng nhập " + signUpForm.getUsername() +
+                    " đã được sử dụng, vui lòng chọn tên khác"), HttpStatus.BAD_REQUEST);
+        }
+        if (iAccountService.existsAccountByEmail(signUpForm.getEmail())) {
+            return new ResponseEntity<>(new ResponseMessage("Email đã tồn tại"), HttpStatus.BAD_REQUEST);
+        }
+        Account account = new Account(signUpForm.getUsername(), passwordEncoder.encode(signUpForm.getPassword()), signUpForm.getName(), signUpForm.getEmail());
+        Set<Role> roles = new HashSet<>();
+        Role role = iRoleService.findByName(RoleName.ROLE_CUSTOMER).orElseThrow(() -> new RuntimeException("Role not found"));
+        roles.add(role);
+        account.setRoleSet(roles);
+        iAccountService.save(account);
+        return new ResponseEntity<>(new ResponseMessage("Đăng kí thành công"), HttpStatus.OK);
+    }
 
 }
