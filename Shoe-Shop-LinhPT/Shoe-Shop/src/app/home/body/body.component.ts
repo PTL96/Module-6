@@ -4,7 +4,11 @@ import {Product} from "../../entity/product";
 import {ViewportScroller} from "@angular/common";
 import {CategoryService} from "../../service/category.service";
 import {Category} from "../../entity/category";
-import {CartService} from "../../service/cart/cart.service";
+import Swal from "sweetalert2";
+import {Cart} from "../../entity/cart";
+import {OderService} from "../../service/oder.service";
+import {Oder} from "../../entity/oder";
+
 
 @Component({
   selector: 'app-body',
@@ -20,11 +24,14 @@ export class BodyComponent implements OnInit {
   name: string = '';
   category: string = '';
   categoryList: Category[] = []
+  cart: Cart = {price: 0, quantity: 0};
+  carts: Cart[] = [];
+ // product:Product = {};
 
   constructor(private productService: ProductService,
               private scroll: ViewportScroller,
               private categoryService: CategoryService,
-              private cartService: CartService) {
+              private oderService: OderService) {
     this.categoryService.getAll().subscribe(data => {
       this.categoryList = data;
     })
@@ -45,15 +52,20 @@ export class BodyComponent implements OnInit {
         this.size = data.size
         this.first = data.first
         this.last = data.last
-
       }
     })
   }
 
+  addToCart(product: Product) {
+    this.oderService.add(product).subscribe((oder:Oder)=>{
+      console.log("Đã thêm vào giỏ"+ oder)
+    });
+  }
+
+
   scrollProduct() {
     this.scroll.scrollToPosition([0, 1200]);
   }
-
 
 
 }

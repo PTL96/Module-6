@@ -5,6 +5,8 @@ import {SecurityService} from "../../service/security/security.service";
 import {Router} from "@angular/router";
 import {ProductService} from "../../service/product.service";
 import {Product} from "../../entity/product";
+import {Cart} from "../../entity/cart";
+import {ShareService} from "../../service/security/share.service";
 
 @Component({
   selector: 'app-header',
@@ -17,11 +19,15 @@ export class HeaderComponent implements OnInit {
   user: any;
   username = '';
   searchProduct: Product[] = [];
+  role = '';
+  cart: Cart[] = []
+  length = 0;
 
   constructor(private scroll: ViewportScroller,
               private tokenStorageService: TokenStorageService,
               private securityService: SecurityService,
               private router: Router,
+              private share: ShareService,
               private productService: ProductService) {
     this.securityService.getIsLoggedIn().subscribe(next => {
       this.isLoggedIn = next;
@@ -29,6 +35,10 @@ export class HeaderComponent implements OnInit {
     this.securityService.getUserLoggedIn().subscribe(next => {
       this.user = next;
     });
+    if (tokenStorageService.getRole()) {
+      this.role = tokenStorageService.getRole()[0];
+      console.log(this.role);
+    }
   }
 
   ngOnInit(): void {
@@ -41,6 +51,9 @@ export class HeaderComponent implements OnInit {
   // tslint:disable-next-line:typedef
   scrollToTop() {
     this.scroll.scrollToPosition([0, 0]);
+  }
+  carCount(){
+
   }
 
   logout() {

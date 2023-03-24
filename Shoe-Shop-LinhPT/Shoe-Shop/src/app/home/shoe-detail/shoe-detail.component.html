@@ -5,19 +5,12 @@
     </div>
     <div class="col-2">
       <h1>{{temp.productName}}</h1>
-      <h3 style="color: red">{{temp.price}}</h3>
+      <h3 style="color: red">{{temp.price | number:'1.0-0'}} VNĐ</h3>
       <select>
-        <option>Chọn size</option>
-        <option>37</option>
-        <option>38</option>
-        <option>39</option>
-        <option>40</option>
-        <option>41</option>
-        <option>42</option>
-        <option>43</option>
+        <option  *ngFor="let s of size" [value]="s.sizeId">{{s.sizeNumber}}</option>
       </select>
       <input type="number" value="1">
-      <a class="btn" routerLink="/cart" (click)="pushProduct(temp)">Thêm vào giỏ</a>
+<!--      <a class="btn" routerLink="/" (click)= "addTocard(temp.productId , temp.avatar, temp.price, temp.productName)">Thêm vào giỏ</a>-->
       <a href="" class="btn1" (click)="scrollProduct()">Quay lại</a>
       <h3>{{temp.productName}}</h3>
       <p>{{temp.description}}</p>

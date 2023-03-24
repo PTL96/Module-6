@@ -23,7 +23,7 @@
       <div class="custom_select">
         <select formControlName="category">
           <option value="">Chọn loại sản phẩm</option>
-          <option  *ngFor="let item of category" [ngValue]="item">{{item.categoryName}}</option>
+          <option  *ngFor="let item of category" [ngValue]="item" [(ngModel)]="item.categoryName">{{item.categoryName}}</option>
         </select>
       </div>
     </div>

@@ -8,4 +8,5 @@ export interface Product {
   avatar?: string;
   flagDelete?: boolean;
   category?: Category;
+  quantity?: number;
 }

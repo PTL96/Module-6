@@ -1,28 +1,36 @@
 import {Injectable} from '@angular/core';
+import {Cart} from "../../entity/cart";
 
 const TOKEN_KEY = 'Token_key';
+const EMAIL_KEY = 'Email_key';
 const NAME_KEY = 'Name_key';
 const ROLE_KEY = 'Role_key';
 const USERNAME_KEY = 'Username_account_key';
 const ID_ACCOUNT_KEY = 'Id_Account_key';
-const EMAIL_KEY = 'Email_key';
 const AVATAR_KEY = 'Avatar_key';
 const USER_KEY = 'auth-user';
+const DAYOFBIRTH = 'Day_of_birth_key'
 const IDCARD = 'Card_Id';
 const PHONENUMBER_KEY = 'Phonenumber_key'
 const ADDRESS_KEY = 'Address_key'
-const DAYOFBIRTH = 'Day_of_birth_key'
+const CART = 'cart_key'
+const STORAGE= 'storage_key'
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenStorageService {
+  cart: Cart[] = []
 
   constructor() {
   }
 
   logout() {
     window.localStorage.clear();
+    window.sessionStorage.clear();
+  }
+
+  public clearCart() {
     window.sessionStorage.clear();
   }
 
@@ -37,14 +45,23 @@ export class TokenStorageService {
   }
 
   public getToken(): string {
-    if (localStorage.getItem(TOKEN_KEY) !== null) {
+    if (this.getStorage()== 'local') {
       return localStorage.getItem(TOKEN_KEY) as string;
     } else {
       return sessionStorage.getItem(TOKEN_KEY) as string;
     }
   }
+  public setToken(token: string) {
+    if (this.getStorage() == 'local') {
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.setItem(TOKEN_KEY, token);
+    } else {
+      sessionStorage.removeItem(TOKEN_KEY);
+      sessionStorage.setItem(TOKEN_KEY, token);
+    }
+  }
 
-  public saveUserLocal(user: any,email: string, idAccount: string, username: string, name: string, roles: string[], avatar: string, idCard: string, phoneNumber: string, address: string, dateOfBirth: string) {
+  public saveUserLocal(user: any, email: string, idAccount: string, username: string, name: string, roles: string[], avatar: string, idCard: string, phoneNumber: string, address: string, dateOfBirth: string) {
     window.localStorage.removeItem(EMAIL_KEY);
     window.localStorage.removeItem(NAME_KEY);
     window.localStorage.removeItem(ROLE_KEY);
@@ -70,7 +87,7 @@ export class TokenStorageService {
   }
 
 
-  public saveUserSession(user: any, email: string, idAccount: string, username: string, name: string, roles: string[], avatar: string, idCard: string, phoneNumber: string, address: string, dateOfBirth: string) {
+  public saveUserSession(user: any, email: string, idAccount: string, username: string, name: string, roles: string[], avatar: string, dateOfBirth: string, phoneNumber: string, address: string, idCard: string) {
     window.sessionStorage.removeItem(EMAIL_KEY);
     window.sessionStorage.removeItem(NAME_KEY);
     window.sessionStorage.removeItem(ROLE_KEY);
@@ -87,8 +104,8 @@ export class TokenStorageService {
     window.sessionStorage.setItem(NAME_KEY, JSON.stringify(name));
     window.sessionStorage.setItem(ROLE_KEY, JSON.stringify(roles));
     window.sessionStorage.setItem(AVATAR_KEY, JSON.stringify(avatar));
-    window.sessionStorage.setItem(IDCARD, JSON.stringify(idCard));
     window.sessionStorage.setItem(DAYOFBIRTH, JSON.stringify(dateOfBirth));
+    window.sessionStorage.setItem(IDCARD, JSON.stringify(idCard));
     window.sessionStorage.setItem(PHONENUMBER_KEY, JSON.stringify(phoneNumber));
     window.sessionStorage.setItem(ADDRESS_KEY, JSON.stringify(address));
     window.sessionStorage.removeItem(USER_KEY);
@@ -97,39 +114,53 @@ export class TokenStorageService {
 
 
   public getName(): string {
-    if(localStorage.getItem(NAME_KEY) != null){
-      return <string> localStorage.getItem(NAME_KEY);
+    if (localStorage.getItem(NAME_KEY) != null) {
+      return <string>localStorage.getItem(NAME_KEY);
     }
-    return <string> sessionStorage.getItem(NAME_KEY);
+    return <string>sessionStorage.getItem(NAME_KEY);
   }
 
+  public setStorage(storage: string) {
+    localStorage.removeItem(STORAGE);
+    localStorage.setItem(STORAGE, storage);
+    sessionStorage.removeItem(STORAGE);
+    sessionStorage.setItem(STORAGE, storage);
+  }
 
-  public getEmail(): string{
-    if(localStorage.getItem(EMAIL_KEY) != null){
-      return <string> localStorage.getItem(EMAIL_KEY);
+  public getStorage() {
+    if (localStorage.getItem(STORAGE) == 'local' || sessionStorage.getItem(STORAGE) == 'local') {
+      return localStorage.getItem(STORAGE);
+    } else {
+      return sessionStorage.getItem(STORAGE);
     }
-    return <string> sessionStorage.getItem(EMAIL_KEY);
+  }
+
+  public getEmail(): string {
+    if (localStorage.getItem(EMAIL_KEY) != null) {
+      return <string>localStorage.getItem(EMAIL_KEY);
+    }
+    return <string>sessionStorage.getItem(EMAIL_KEY);
   }
 
   public getIdAccount(): string {
-    if(localStorage.getItem(ID_ACCOUNT_KEY) != null){
-      return <string> localStorage.getItem(ID_ACCOUNT_KEY);
+    if (localStorage.getItem(ID_ACCOUNT_KEY) != null) {
+      return <string>localStorage.getItem(ID_ACCOUNT_KEY);
     }
-    return <string> sessionStorage.getItem(ID_ACCOUNT_KEY);
+    return <string>sessionStorage.getItem(ID_ACCOUNT_KEY);
   }
 
 
   public getUsername(): string {
-    if(localStorage.getItem(USERNAME_KEY) != null){
-      return <string> localStorage.getItem(USERNAME_KEY);
+    if (localStorage.getItem(USERNAME_KEY) != null) {
+      return <string>localStorage.getItem(USERNAME_KEY);
     }
-    return <string> sessionStorage.getItem(USERNAME_KEY);
+    return <string>sessionStorage.getItem(USERNAME_KEY);
   }
 
 
   public getUser() {
     let itemString;
-    if(localStorage.getItem(USER_KEY) != null) {
+    if (localStorage.getItem(USER_KEY) != null) {
       itemString = localStorage.getItem(USER_KEY);
     } else {
       itemString = sessionStorage.getItem(USER_KEY);
@@ -139,11 +170,50 @@ export class TokenStorageService {
 
 
   public getRole(): string[] {
-    if (localStorage.getItem(ROLE_KEY) != null){
-      return JSON.parse(<string> localStorage.getItem(ROLE_KEY))
+    if (localStorage.getItem(ROLE_KEY) != null) {
+      return JSON.parse(<string>localStorage.getItem(ROLE_KEY))
     }
-    return JSON.parse(<string> sessionStorage.getItem(ROLE_KEY));
+    return JSON.parse(<string>sessionStorage.getItem(ROLE_KEY));
   }
+
+  public setCart(cart: Cart[]) {
+    sessionStorage.removeItem(CART);
+    sessionStorage.setItem(CART, JSON.stringify(cart));
+  }
+
+
+  public getCart() {
+    const cart = sessionStorage.getItem(CART)
+    if (cart == 'undefined') {
+      return this.cart;
+    } else {
+      if (cart != null) {
+        this.cart = JSON.parse(cart)
+      }
+
+
+      return this.cart
+    }
+  }
+  //
+  //
+  // checkProducName(productName: string) {
+  //   for (let i = 0; i < this.getCart().length; i++) {
+  //     if (this.getCart()[i].nameProduct == productName) {
+  //       return true
+  //     }
+  //   }
+  //   return false;
+  // }
+  //
+  // upQuantity(id: number, carts: Cart[]) {
+  //   for (let i = 0; i < carts.length; i++) {
+  //     if (carts[i].id == id) {
+  //       carts[i].quantitys += 1;
+  //       break;
+  //     }
+  //   }
+  // }
 
 }
 

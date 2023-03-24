@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
             this.tokenStorageService.saveUserLocal(data, data.email, data.id, data.username, data.name, data.roles, data.avatar, data.address, data.phoneNumber, data.dateOfBirth, data.idCard);
           } else {
             this.tokenStorageService.saveTokenSession(data.token);
-            this.tokenStorageService.saveUserSession(data, data.email, data.id, data.username, data.name, data.roles, data.avatar, data.address, data.phoneNumber, data.dateOfBirth, data.idCard);
+            this.tokenStorageService.saveUserSession(data, data.email, data.id, data.username, data.name, data.roles, data.avatar, data.dateOfBirth, data.phoneNumber,data.address, data.idCard);
           }
           const user = this.tokenStorageService.getUser();
           this.securityService.setIsLoggedIn(user, true);
