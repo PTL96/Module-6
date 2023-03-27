@@ -85,4 +85,9 @@ public class AuthRestController {
         return new ResponseEntity<>(new ResponseMessage("Đăng kí thành công"), HttpStatus.OK);
     }
 
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<?> register(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(iAccountService.findById(id), HttpStatus.ACCEPTED);
+
+    }
 }

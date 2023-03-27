@@ -32,6 +32,11 @@ public class AccountService implements IAccountService {
     }
 
     @Override
+    public Account findById(Long id) {
+        return iAccountRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public void save(Account account) {
         iAccountRepository.save(account);
     }

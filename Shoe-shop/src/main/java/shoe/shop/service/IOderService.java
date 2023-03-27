@@ -1,10 +1,15 @@
 package shoe.shop.service;
 
+import shoe.shop.dto.oder.OderView;
 import shoe.shop.entity.oderProduct.Oder;
-import shoe.shop.entity.product.Product;
+
+
+import java.util.List;
 
 public interface IOderService {
-    Oder findByProduct(Product product);
 
     void save(Oder oder);
+
+
+//    List<OderView> getAllOderView();
 }

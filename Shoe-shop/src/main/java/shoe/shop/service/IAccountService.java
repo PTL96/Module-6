@@ -11,5 +11,7 @@ public interface IAccountService {
 
     boolean existsAccountByUsername(String username);
 
+    Account findById(Long id);
+
     void save(Account account);
 }

@@ -43,7 +43,7 @@ public class Account {
     @Lob
     private String avatar;
 
-    public Account() {
+    public Account(String username, String encode, String name, String email) {
     }
 
     public Account(Long accountId, String username, String password, String email, String name, String idCard, String address, String phoneNumber, String dateOfBirth, boolean flagDelete, Set<Role> roleSet, String avatar) {
@@ -61,7 +61,8 @@ public class Account {
         this.avatar = avatar;
     }
 
-    public Account(String username, String encode, String name, String email) {
+    public Account() {
+
     }
 
     public Long getAccountId() {

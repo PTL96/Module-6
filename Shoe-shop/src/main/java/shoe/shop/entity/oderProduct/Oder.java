@@ -1,9 +1,5 @@
 package shoe.shop.entity.oderProduct;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import shoe.shop.entity.account.Account;
 import shoe.shop.entity.product.Product;
 
@@ -20,7 +16,7 @@ public class Oder {
     private double priceProduct;
     private String avatarProduct;
     private int quantity;
-    private int size;
+    private int sizes;
     private int totalPrice;
     @ManyToOne
     @JoinColumn(name = "account_id")
@@ -32,26 +28,16 @@ public class Oder {
     public Oder() {
     }
 
-    public Oder(Long oderId, String nameProduct, double priceProduct, String avatarProduct, int quantity, Account account, Product product) {
+    public Oder(Long oderId, String nameProduct, double priceProduct, String avatarProduct, int quantity, int sizes, int totalPrice, Account account, Product product) {
         this.oderId = oderId;
         this.nameProduct = nameProduct;
         this.priceProduct = priceProduct;
         this.avatarProduct = avatarProduct;
         this.quantity = quantity;
+        this.sizes = sizes;
+        this.totalPrice = totalPrice;
         this.account = account;
         this.product = product;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public Oder(int size) {
-        this.size = size;
     }
 
     public Long getOderId() {
@@ -92,6 +78,22 @@ public class Oder {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(int sizes) {
+        this.sizes = sizes;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Account getAccount() {

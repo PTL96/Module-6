@@ -1,5 +1,6 @@
 package shoe.shop.dto.product;
 
+import shoe.shop.entity.account.Account;
 import shoe.shop.entity.product.Category;
 
 public class ProductDto {
@@ -22,6 +23,7 @@ public class ProductDto {
     private String avatar;
     private boolean flagDelete;
     private Category category;
+    private Account account;
 
 
     public ProductDto() {
@@ -39,6 +41,10 @@ public class ProductDto {
         this.avatar = avatar;
         this.flagDelete = flagDelete;
         this.category = category;
+    }
+
+    public ProductDto(Account account) {
+        this.account = account;
     }
 
     public Long getProductId() {
@@ -103,5 +109,13 @@ public class ProductDto {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
