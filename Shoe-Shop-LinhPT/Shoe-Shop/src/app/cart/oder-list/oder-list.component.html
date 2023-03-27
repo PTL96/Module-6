@@ -1,60 +1,60 @@
 
-<!--<div class="small-container cart-page" style="min-height: 60vh">-->
-<!--  <table>-->
-<!--<thead>-->
-<!--    <tr>-->
-<!--      <th>Sản phẩm</th>-->
-<!--      <th>Số lượng</th>-->
-<!--      <th>Size</th>-->
-<!--      <th>Giá tiền</th>-->
-<!--    </tr>-->
-<!--</thead>-->
-<!--  <tbody *ngIf="cart.length > 0; else emptyCart">-->
-<!--      <tr *ngFor="let temp of cart; index as i">-->
-<!--        <td>-->
-<!--          <div class="cart-info">-->
-<!--            <img src="{{temp.imageProduct}}"/>-->
-<!--            <div>-->
-<!--              <p>{{temp.nameProduct}}</p>-->
-<!--              <small>{{temp.price | number:'1.0-0'}} VNĐ</small><br>-->
-<!--              <a style="cursor: pointer" (click)="delete(i)">Xóa khỏi giỏ</a>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <button class="btn3 btn-link px-2"-->
-<!--                  (click)="downQuantity(i)">-->
-<!--            <i class="fas fa-minus"></i>-->
-<!--          </button>-->
-<!--          <input class="quantity" readonly type="number" [value]="temp.quantity" >-->
-<!--          <button class="btn4 btn-link px-2"-->
-<!--                  (click)="upQuantity(i)" >-->
-<!--            <i class="fas fa-plus"></i>-->
-<!--          </button>-->
-<!--        </td>-->
-<!--        <td></td>-->
-<!--        <td>{{totalProduct | number:'1.0-0'}} VNĐ</td>-->
-<!--      </tr>-->
-<!--  </tbody>-->
-<!--  </table>-->
+<div class="small-container cart-page" style="min-height: 60vh">
+  <table>
+<thead>
+    <tr>
+      <th>Sản phẩm</th>
+      <th>Số lượng</th>
+      <th>Size</th>
+      <th>Giá tiền</th>
+    </tr>
+</thead>
+  <tbody *ngIf="cart.length > 0; else emptyCart">
+      <tr *ngFor="let temp of cart; index as i">
+        <td>
+          <div class="cart-info">
+            <img src="{{temp.imageProduct}}"/>
+            <div>
+              <p>{{temp.nameProduct}}</p>
+              <small>{{temp.price | number:'1.0-0'}} VNĐ</small><br>
+<!--              <a style="cursor: pointer" ">Xóa khỏi giỏ</a>-->
+            </div>
+          </div>
+        </td>
+        <td>
+          <button class="btn3 btn-link px-2"
+                  (click)="(i)">
+            <i class="fas fa-minus"></i>
+          </button>
+          <input class="quantity" readonly type="number" [value]="temp.quantity" >
+          <button class="btn4 btn-link px-2"
+                  (click)="(i)" >
+            <i class="fas fa-plus"></i>
+          </button>
+        </td>
+        <td></td>
+        <td>{{totalProduct | number:'1.0-0'}} VNĐ</td>
+      </tr>
+  </tbody>
+  </table>
 
-<!--  <div class="total-price">-->
-<!--    <table>-->
-<!--&lt;!&ndash;      <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td>Thành tiền</td>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td>7.950.000đ</td>&ndash;&gt;-->
-<!--&lt;!&ndash;      </tr>&ndash;&gt;-->
-
+  <div class="total-price">
+    <table>
 <!--      <tr>-->
-<!--        <td style="color: red">Tổng thanh toán:</td>-->
-<!--        <td style="color: red">{{total | number:'1.0-0'}} VNĐ</td>-->
+<!--        <td>Thành tiền</td>-->
+<!--        <td>7.950.000đ</td>-->
 <!--      </tr>-->
-<!--    </table>-->
-<!--  </div>-->
-<!--   <a href="#" class="btn1" style="float: right">Thanh toán</a>-->
-<!--   <a routerLink="/" class="btn" style="float: right; margin-right: 95px" (click)="scrollProductBack()">Mua tiếp</a>-->
-<!--</div>-->
 
-<!--<ng-template #emptyCart>-->
-<!--  <h3 style="color: red; text-align: center">Chưa có sản phẩm nào trong giỏ hàng <span style="font-size: 35px">😢</span></h3>-->
-<!--</ng-template>-->
+      <tr>
+        <td style="color: red">Tổng thanh toán:</td>
+        <td style="color: red">{{total | number:'1.0-0'}} VNĐ</td>
+      </tr>
+    </table>
+  </div>
+   <a href="#" class="btn1" style="float: right">Thanh toán</a>
+   <a routerLink="/" class="btn" style="float: right; margin-right: 95px" (click)="scrollProductBack()">Mua tiếp</a>
+</div>
+
+<ng-template #emptyCart>
+  <h3 style="color: red; text-align: center">Chưa có sản phẩm nào trong giỏ hàng <span style="font-size: 35px">😢</span></h3>
+</ng-template>

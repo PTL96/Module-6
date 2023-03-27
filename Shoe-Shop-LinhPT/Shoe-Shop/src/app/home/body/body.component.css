@@ -12,11 +12,15 @@ a {
   color: #555;
 }
 
+.buton-mn{
+  text-decoration: none;
+  color: #555;
+}
 p {
   color: #555;
 }
 
-.title {
+.titleabc {
   text-align: center;
   margin: 0 auto 80px;
   position: relative;
@@ -24,7 +28,7 @@ p {
   color: #555;
 }
 
-.title:after {
+.titleabc:after {
   content: '';
   background: #ff523b;
   width: 80px;
@@ -80,7 +84,7 @@ small {
   background: #563434;
 }
 
-.row {
+.rowabc {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -89,26 +93,26 @@ small {
 
 
 @media (max-width: 700px) {
-  .row {
+  .rowabc {
     flex-direction: column;
   }
 }
 
-.category {
+.categoryabc {
   margin: 70px 0;
 }
 
-.col-3 {
+.col-3a {
   flex-basis: 30%;
   min-width: 250px;
   margin-bottom: 30px;
 }
 
-.col-3 img {
+.col-3a img {
   width: 100%;
 }
 
-.small-container {
+.small-containerabc {
   max-width: 1080px;
   margin: auto;
   padding-left: 25px;
@@ -232,30 +236,37 @@ select:focus {
   cursor: pointer;
 }
 
-.form{
+.formabc{
   background: #fff;
   width: 400px;
   display: flex;
   border: 1px solid #ff523b;
   height: 35px;
 }
-.form input{
+.formabc input{
   flex: 1;
   border: none;
   outline: none;
 }
-.form button{
+.formabc button{
   background: tomato;
-  padding: 0px 20px;
+  padding: 0 20px;
   border: none;
   color: #fff;
   letter-spacing: 1px;
   cursor: pointer;
+  display: block;
 }
-.form .fa-sharp{
+.formabc .fa-sharp{
   align-self: center;
   padding: 10px 10px;
   color: #777;
+}
+.formabc .mnb{
+  align-self: center;
+  padding: 10px 10px;
+  color: #777;
+  border: none;
 }
  ul{
   display: inline-block;
@@ -267,3 +278,36 @@ select:focus {
 }
 
 
+.sliderabc ul{
+  padding: 0;
+  list-style: none;
+  display: flex;
+  width: max-content;
+  animation: runSlider 5s linear infinite;
+}
+.sliderabc img{
+  height: 15px;
+  margin-right: 10px;
+}
+.sliderabc li{
+  background-color: #322f2f;
+  width: 150px;
+  letter-spacing: 1px;
+  font-family: monospace;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  /*width: 150px;*/
+  padding: 10px 0 10px 10px;
+  margin-right: 5px;
+}
+.sliderabc{
+  overflow: hidden;
+}
+@keyframes runSlider{
+  from{
+    transform: translateX(0);
+  }to{
+     transform: translateX(calc(-165px*2));
+   }
+}

@@ -22,13 +22,13 @@ export class HeaderComponent implements OnInit {
   role = '';
   cart: Cart[] = []
   length = 0;
-
   constructor(private scroll: ViewportScroller,
               private tokenStorageService: TokenStorageService,
               private securityService: SecurityService,
               private router: Router,
               private share: ShareService,
               private productService: ProductService) {
+
     this.securityService.getIsLoggedIn().subscribe(next => {
       this.isLoggedIn = next;
     });
@@ -42,8 +42,17 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
+    this.isLoggedIn = this.tokenStorageService.getIsLogged();
+    this.loader()
 
+  }
+  loader() {
+    if (this.isLoggedIn) {
+     this.securityService.getProfile(this.tokenStorageService.getIdAccount()).subscribe(
+       next => this.user = next
+     )
+    }
+  }
   @HostListener('window:scroll', ['$event']) onScroll() {
     this.pageYoffSet = window.pageYOffset;
   }

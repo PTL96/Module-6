@@ -33,7 +33,9 @@ export class SecurityService {
     }, this.httpOptions);
 
   }
-
+  public getProfile(id:string):Observable<Account> {
+    return this.httpClient.get<Account>(this.URL_SCRT + '/profile/' + id)
+  }
   setIsLoggedIn(user: any,isLoggedIn: boolean) {
     this.isLoggedInObservable.next(isLoggedIn);
     this.isUserObservable.next(user);

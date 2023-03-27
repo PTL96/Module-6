@@ -2,10 +2,11 @@ import {Product} from "./product";
 
 export interface Oder {
   oderId?:number;
-  nameProduct?:string;
-  priceProduct:number
-  avatarProduct?: string;
-  quantity:number
-  account?:Account;
-  product?:Product;
+  quantity?:number;
+  sizes?:number;
+  productName?: string;
+  avatar?: string;
+  account_id?:string;
+  product_id?:number;
+  priceProduct?:number
 }

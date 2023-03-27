@@ -76,3 +76,12 @@ input:focus{
   border-radius: 30px;
   transition: background 0.5s;
 }
+
+select {
+  border: 1px solid #ff523b;
+  padding: 5px;
+}
+
+select:focus {
+  outline: none;
+}

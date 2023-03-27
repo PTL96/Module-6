@@ -1,60 +1,118 @@
+<div class="sliderabc" style="color: #fff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;">
+  <ul>
+    <li>
+      <img src="https://logodix.com/logo/662250.png" alt=""> Nike
+    </li>
+    <li>
+      <img src="https://tse1.mm.bing.net/th?id=OIP.uX_ezGIJ2dd3IF5yO5og1AHaFj&pid=Api&P=0" alt=""> Converse
+    </li>
+    <li>
+      <img src="https://tse4.mm.bing.net/th?id=OIP.K2Q7T8ut9DWzf89nIk_KxAHaE7&pid=Api&P=0" alt=""> Adidas
+    </li>
+    <li>
+      <img src="http://2.bp.blogspot.com/-qaXQH8brdS8/UTJrGVjyDHI/AAAAAAAAABg/KTCk38iZJ9k/s1600/Logo+Puma.jpg" alt=""> Puma
+    </li>
+    <li>
+      <img src="../../../assets/img/logo.png" alt=""> RedShop
+    </li>
+    <li>
+      <img src="https://tse1.mm.bing.net/th?id=OIP.-ZirgQE5pr8e7htQWowJIgHaHa&pid=Api&P=0" alt=""> Instagram
+    </li>
+    <li>
+      <img src="https://tse2.mm.bing.net/th?id=OIP.0NrOm1z0xVQQy20AAc1VHQHaHa&pid=Api&P=0" alt=""> Tuấn Linh
+    </li>
+    <li>
+      <img src="https://logodix.com/logo/662250.png" alt=""> Nike
+    </li>
+    <li>
+      <img src="https://tse1.mm.bing.net/th?id=OIP.uX_ezGIJ2dd3IF5yO5og1AHaFj&pid=Api&P=0" alt=""> Converse
+    </li>
+    <li>
+      <img src="https://tse4.mm.bing.net/th?id=OIP.K2Q7T8ut9DWzf89nIk_KxAHaE7&pid=Api&P=0" alt=""> Adidas
+    </li>
+    <li>
+      <img src="http://2.bp.blogspot.com/-qaXQH8brdS8/UTJrGVjyDHI/AAAAAAAAABg/KTCk38iZJ9k/s1600/Logo+Puma.jpg" alt=""> Puma
+    </li>
+    <li>
+      <img src="../../../assets/img/logo.png" alt=""> RedShop
+    </li>
+    <li>
+      <img src="https://tse1.mm.bing.net/th?id=OIP.-ZirgQE5pr8e7htQWowJIgHaHa&pid=Api&P=0" alt=""> Instagram
+    </li>
+    <li>
+      <img src="https://tse2.mm.bing.net/th?id=OIP.0NrOm1z0xVQQy20AAc1VHQHaHa&pid=Api&P=0" alt=""> Tuấn Linh
+    </li>
+  </ul>
+</div>
 <body style="min-height: 210vh">
-<div class="category">
-  <div class="small-container">
-    <div class="row zoom">
-      <div class="col-3">
+
+<div class="categoryabc">
+  <div class="small-containerabc">
+    <div class="rowabc zoom">
+      <div class="col-3a">
         <img src="../../../assets/img/category-1.jpg"></div>
-      <div class="col-3">
+      <div class="col-3a">
         <img src="../../../assets/img/category-3.jpg"></div>
-      <div class="col-3">
+      <div class="col-3a">
         <img src="../../../assets/img/category-2.jpg"></div>
     </div>
   </div>
 </div>
 
-<div class="small-container">
-  <h2 class="title zoom">Sản Phẩm Mới Nhất</h2>
 
+<div class="small-containerabc">
+  <h2 class="titleabc zoom">Sản Phẩm Mới Nhất</h2>
 </div>
 
-<div class="small-container">
-  <h2 class="title zoom">Sản Phẩm Của Chúng Tôi</h2>
-  <div style="margin-left: 67%; display: flex">
+
+<div class="small-containerabc">
+  <h2 class="titleabc zoom">Sản Phẩm Của Chúng Tôi</h2>
+  <div style="margin-left: 62%; display: flex; margin-bottom: 100px">
     <select style="margin-right: 15px" [(ngModel)]="category" (change)="getAllProduct(size)">
       <option value="">Tất cả</option>
-      <option *ngFor="let item of categoryList" [value]="item.categoryName" >{{item.categoryName}}</option>
+      <option *ngFor="let item of categoryList" [value]="item.categoryName">{{item.categoryName}}</option>
     </select>
-    <div class="animationTop delay-02 form">
+    <div class="animationTop delay-02 formabc">
       <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
       <input type="text" placeholder="Bạn cần gì ?" [(ngModel)]="name">
-      <button type="submit" (click)="getAllProduct(size)">Tìm kiếm</button>
+      <i class="fa-thin fa-xmark-large"></i>
+      <button type="submit" (click)="getAllProduct(size)">Tìm</button>
     </div>
   </div>
 </div>
 <div>
 
   <div>
-    <div class="row">
-      <div class="card col-3" *ngFor="let item of pageSize">
-          <div class="my-card" style="margin-left: 60px">
-            <img [src]="item.avatar" class="my-card-img"/>
-            <div class="my-card-body">
-              <a><i class="fa-regular fa-trash-can fa-bounce fa-xl" style="color: #fc0b0b; float: right; padding-bottom: 70px; margin-right: 15px; cursor: pointer"></i></a>
-              <h6 class="my-card-title">{{item.productName }}</h6>
-              <!--    <i class="fa-thin fa-badge">Giảm giá</i>-->
-<!--              <h3 style="margin-left: 10px; color: red; padding-top: 20px">{{item.price | currency:'VND':'symbol-narrow':'1.0-0'}}</h3>-->
-              <h3 style="margin-left: 10px; color: red; padding-top: 20px">{{item.price | number:'1.0-0'}} VNĐ</h3>
-              <p class="my-card-subtitle">{{item.description | slice: 0: 100}}...</p>
-              <div style="display: block">
+    <div class="rowabc">
+      <div class="carda col-3a" *ngFor="let item of pageSize">
+        <div class="my-card" style="margin-left: 60px">
+          <img [src]="item.avatar" class="my-card-img"/>
+          <div class="my-card-body">
+            <a class="buton-mn" *ngIf="role =='ROLE_ADMIN'">
+           <i class="fa-regular fa-trash-can fa-bounce fa-xl"
+                         style="color: #fc0b0b; float: right; padding-bottom: 70px; margin-right: 15px; cursor: pointer"></i>
+
+            </a>
+            <h5 class="my-card-title">{{item.productName }}</h5>
+            <!--    <i class="fa-thin fa-badge">Giảm giá</i>-->
+            <h3 style="margin-left: 10px; color: red; padding-top: 20px">{{item.price | number:'1.0-0'}} VNĐ</h3>
+            <p class="my-card-subtitle">{{item.description | slice: 0: 100}}...</p>
+            <div style="display: block">
               <a [routerLink]="['/detail',item.productId]">
-                <button class="my-card-btn" style="margin-left: 17px; background:  #2fb1bd"><i class="fa-solid fa-circle-info fa-shake" style="font-size: 20px"></i></button>
+                <button class="my-card-btn" style="margin-left: 17px; background:  #2fb1bd"><i
+                  class="fa-solid fa-circle-info fa-shake" style="font-size: 20px"></i></button>
               </a>
               <a>
-              <button class="my-card-btn" style="margin-left: 73px; background:  #f44336" (click)= "addToCart(item)"><i class="fa-sharp fa-solid fa-cart-plus fa-beat" style="font-size: 20px"></i></button>
+                <button class="my-card-btn" style="margin-left: 63px; background:  #f44336" (click)="addToCart(item)"><i
+                  class="fa-sharp fa-solid fa-cart-plus fa-beat" style="font-size: 20px"></i></button>
               </a>
-              </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -71,10 +129,9 @@
 </div>
 
 <div class="offer">
-  <div class="small-container">
-    <div class="row">
+  <div class="small-containerabc">
+    <div class="rowabc">
       <div class="col-2">
-
         <img src="../../../assets/img/Nike-16-removebg-preview.png" class="offer-img zoom"/></div>
       <div class="col-2">
         <h1 class="zoom">NIKE BRAND F1</h1>
@@ -90,8 +147,8 @@
 </div>
 
 <div class="brands">
-  <div class="small-container">
-    <div class="row">
+  <div class="small-containerabc">
+    <div class="rowabc">
       <div class="col-5">
         <img src="../../../assets/img/logo-godrej.png" class="zoom"/>
       </div>
@@ -111,5 +168,6 @@
 
 </body>
 <ng-template #emptyCart>
-  <h3 style="color: red; text-align: center">Chưa có sản phẩm nào trong giỏ hàng <span style="font-size: 35px">😢</span></h3>
+  <h3 style="color: red; text-align: center">Chưa có sản phẩm nào trong giỏ hàng <span style="font-size: 35px">😢</span>
+  </h3>
 </ng-template>

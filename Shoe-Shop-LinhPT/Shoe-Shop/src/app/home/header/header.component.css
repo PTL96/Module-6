@@ -54,7 +54,7 @@ p{
   line-height: 60px;
   margin: 25px 0;
 }
-.btn{
+.btnabc{
   display: inline-block;
   background: #FF523b;
   color: #fff;
@@ -63,7 +63,7 @@ p{
   border-radius: 30px;
   transition: background 0.5s;
 }
-.btn:hover{
+.btnabc:hover{
   background: #563434;
 }
 .header{

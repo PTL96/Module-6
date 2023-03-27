@@ -1,13 +1,17 @@
 import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {ProductService} from "../../service/product.service";
-import {Product} from "../../entity/product";
 import {ViewportScroller} from "@angular/common";
 import {CategoryService} from "../../service/category.service";
 import {Category} from "../../entity/category";
-import Swal from "sweetalert2";
-import {Cart} from "../../entity/cart";
 import {OderService} from "../../service/oder.service";
 import {Oder} from "../../entity/oder";
+import {SecurityService} from "../../service/security/security.service";
+import {TokenStorageService} from "../../service/security/token-storage.service";
+import {ProductDto} from "../../entity/product-dto";
+import {Product} from "../../entity/product";
+import {Router} from "@angular/router";
+import Swal from "sweetalert2";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -16,7 +20,7 @@ import {Oder} from "../../entity/oder";
   styleUrls: ['./body.component.css']
 })
 export class BodyComponent implements OnInit {
-  pageSize: Product[] = [];
+  pageSize: ProductDto[] = [];
   size: number = 9;
   first: any;
   last: any;
@@ -24,21 +28,45 @@ export class BodyComponent implements OnInit {
   name: string = '';
   category: string = '';
   categoryList: Category[] = []
-  cart: Cart = {price: 0, quantity: 0};
-  carts: Cart[] = [];
- // product:Product = {};
+  role = '';
+  user: any;
+  isLoggedIn = false;
+  idAccount: any;
+
 
   constructor(private productService: ProductService,
               private scroll: ViewportScroller,
               private categoryService: CategoryService,
-              private oderService: OderService) {
+              private oderService: OderService,
+              private securityService: SecurityService,
+              private tokenStorageService: TokenStorageService,
+              private router: Router,
+              private toast: ToastrService) {
     this.categoryService.getAll().subscribe(data => {
       this.categoryList = data;
-    })
+    });
+
+    this.securityService.getIsLoggedIn().subscribe(next => {
+      this.isLoggedIn = next;
+    });
+    this.securityService.getUserLoggedIn().subscribe(next => {
+      this.user = next;
+    });
+    if (tokenStorageService.getRole()) {
+      this.role = tokenStorageService.getRole()[0];
+      console.log(this.role);
+    }
+    if (this.tokenStorageService.getIdAccount()) {
+      this.idAccount = tokenStorageService.getIdAccount();
+    }
+
   }
 
+
   ngOnInit(): void {
+    this.isLoggedIn = this.tokenStorageService.getIsLogged();
     this.getAllProduct(this.size);
+    this.loader()
   }
 
   @HostListener('window:scroll', ['$event']) onScroll() {
@@ -56,10 +84,30 @@ export class BodyComponent implements OnInit {
     })
   }
 
+  loader() {
+    if (this.isLoggedIn) {
+      this.securityService.getProfile(this.tokenStorageService.getIdAccount()).subscribe(
+        next => this.user = next
+      )
+    }
+  }
+
   addToCart(product: Product) {
-    this.oderService.add(product).subscribe((oder:Oder)=>{
-      console.log("Đã thêm vào giỏ"+ oder)
-    });
+    if (!this.tokenStorageService.getToken()) {
+      Swal.fire({
+        icon: 'error',
+        position: 'top',
+        width:'500px',
+        title: 'Bạn Chưa Đăng Nhập',
+        text: 'Vui lòng đăng nhập để tiếp tục',
+      })
+    } else {
+      this.oderService.add(product, 37).subscribe(ok => {
+        this.toast.success('Bạn đã xóa học sinh thành công', 'Thông báo', {positionClass: 'toast-top', timeOut: 3000},);
+
+      });
+    }
+
   }
 
 

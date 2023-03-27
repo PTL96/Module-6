@@ -1,60 +1,61 @@
 <body>
 <div class="header">
-<div class="container">
-<div class="navbar">
-  <div class="logo">
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">
 
-    <img src="../../../assets/img/logo.png"  width="125px" class="animationTop delay-01"/></div>
-  <nav>
-    <ul>
-
-      <li class="animationTop delay-03"><a routerLink="/">Trang Chủ</a></li>
-      <li class="animationTop delay-03"><a routerLink="/home/create" >Thêm Mới</a></li>
-      <li class="animationTop delay-03"><a routerLink="/home/create">Kho Hàng</a></li>
-      <li class="animationTop delay-04"><a routerLink="/">Lịch Sử Mua Hàng</a></li>
-      <li class="animationTop delay-05"><a routerLink="/security" *ngIf="!isLoggedIn">Đăng Nhập</a></li>
-      <li>
-        <div class="dropdown" *ngIf="isLoggedIn">
-          <button class="dropbtn">{{user.name}}</button>
-<!--          <img src="{{user?.avatar}}" style="width: 30px; height: 30px; border-radius: 50%">-->
-          <div class="dropdown-content">
-<!--            <img src="{{user?.avatar}}" style="width: 40px; background-image: none; border-radius: 50%; height: 40px" height="24" width="24" >-->
-            <a href="#">Thông tin cá nhân</a>
-            <a href="#">Đổi mật khẩu</a>
-            <a (click)="logout()">Đăng xuất</a>
-          </div>
-        </div>
-<!--        <i class="fa-solid fa-angle-down"></i>-->
-      </li>
-    </ul>
-  </nav>
-<a routerLink="/cart">
-  <img src="../../../assets/img/cart.png" width="30px" height="30px" class="animationTop delay-06"/>{{length}}
-</a>
-</div>
-
-  <div class="row">
-    <div class="col-2">
-      <h1 class="animationTop delay-07">Phong Cách Người Dẫn Đầu<br>
-      Nền Tảng Cho Sự Thăng Hoa !
-      </h1>
-      <p class="animationTop delay-08">Thời trang có thể mua được nhưng phong cách phải là điều sẵn có.
-        Hãy tận hưởng việc diện đồ là nghệ thuật đích thực.</p>
-      <a href="#" class="btn animationTop delay-09">Mua Ngay &#8594;</a>
+        <img src="../../../assets/img/logo.png" width="125px" class="animationTop delay-01"/></div>
+      <nav>
+        <ul>
+          <li class="animationTop delay-03"><a routerLink="/">Trang Chủ</a></li>
+          <li class="animationTop delay-03"><a routerLink="/">Liên Hệ</a></li>
+          <li class="animationTop delay-04"><a routerLink="/">Lịch Sử Mua Hàng</a></li>
+          <li class="animationTop delay-03"><a routerLink="/home/create" *ngIf="role != 'ROLE_ADMIN'">Thêm Mới</a></li>
+          <li class="animationTop delay-03"><a routerLink="/home/create" *ngIf="role != 'ROLE_ADMIN'">Kho Hàng</a></li>
+          <li class="animationTop delay-05 "><a routerLink="/security" *ngIf="!isLoggedIn">Đăng Nhập</a></li>
+          <li>
+            <div class="dropdown" *ngIf="isLoggedIn">
+              <button class="dropbtn">{{user.name}}</button>
+              <!--          <img src="{{user?.avatar}}" style="width: 30px; height: 30px; border-radius: 50%">-->
+              <div class="dropdown-content">
+                <!--            <img src="{{user?.avatar}}" style="width: 40px; background-image: none; border-radius: 50%; height: 40px" height="24" width="24" >-->
+                <a href="#">Thông tin cá nhân</a>
+                <a href="#">Đổi mật khẩu</a>
+                <a (click)="logout()">Đăng xuất</a>
+              </div>
+            </div>
+            <!--        <i class="fa-solid fa-angle-down"></i>-->
+          </li>
+        </ul>
+      </nav>
+      <a routerLink="/cart">
+        <img src="../../../assets/img/cart.png" width="30px" height="30px" class="animationTop delay-06"/>
+      </a>
     </div>
-    <div class="col-2">
-      <div class="zoom1">
-      <img src="../../../assets/img/background-removebg-preview.png" class="animationTop delay-10"/>
+
+    <div class="row">
+      <div class="col-2">
+        <h1 class="animationTop delay-07">Phong Cách Người Dẫn Đầu<br>
+          Nền Tảng Cho Sự Thăng Hoa !
+        </h1>
+        <p class="animationTop delay-08">Thời trang có thể mua được nhưng phong cách phải là điều sẵn có.
+          Hãy tận hưởng việc diện đồ là nghệ thuật đích thực.</p>
+        <a href="#" class="btnabc animationTop delay-09">Mua Ngay &#8594;</a>
       </div>
+      <div class="col-2">
+        <div class="zoom1">
+          <img src="../../../assets/img/background-removebg-preview.png" class="animationTop delay-10"/>
+        </div>
+      </div>
+
     </div>
 
   </div>
 
-</div>
-
   <div class="scroll-to-top" *ngIf="pageYoffSet > 0">
-    <a class="btn" (click)="scrollToTop()" style="background-color: #FF523b; border-radius: 50%;height: 20px; cursor: pointer">
-      <i class="fas fa-angle-double-up" ></i>
+    <a class="btnabc" (click)="scrollToTop()"
+       style="background-color: #FF523b; border-radius: 50%;height: 40px; cursor: pointer">
+      <i class="fas fa-angle-double-up"></i>
     </a>
   </div>
 

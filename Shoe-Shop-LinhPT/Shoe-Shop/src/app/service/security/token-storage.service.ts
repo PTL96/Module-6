@@ -21,8 +21,12 @@ const STORAGE= 'storage_key'
 })
 export class TokenStorageService {
   cart: Cart[] = []
-
+   isLogged = false;
   constructor() {
+  }
+
+  getIsLogged() {
+    return !!this.getToken();
   }
 
   logout() {
