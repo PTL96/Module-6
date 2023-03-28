@@ -1,17 +1,16 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {ProductService} from "../../service/product.service";
-import {ViewportScroller} from "@angular/common";
 import {CategoryService} from "../../service/category.service";
 import {Category} from "../../entity/category";
 import {OderService} from "../../service/oder.service";
-import {Oder} from "../../entity/oder";
 import {SecurityService} from "../../service/security/security.service";
 import {TokenStorageService} from "../../service/security/token-storage.service";
 import {ProductDto} from "../../entity/product-dto";
 import {Product} from "../../entity/product";
+import {Component, HostListener, OnInit} from "@angular/core";
+import {ViewportScroller} from "@angular/common";
 import {Router} from "@angular/router";
-import Swal from "sweetalert2";
 import {ToastrService} from "ngx-toastr";
+import {BehaviorSubject} from "rxjs";
 
 
 @Component({
@@ -20,8 +19,12 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./body.component.css']
 })
 export class BodyComponent implements OnInit {
+  private itemsInCartSubject = new BehaviorSubject<number>(0);
+  public itemsInCart$ = this.itemsInCartSubject.asObservable();
+
+
   pageSize: ProductDto[] = [];
-  size: number = 9;
+  size: number = 0;
   first: any;
   last: any;
   pageYoffSet = 0;
@@ -41,7 +44,8 @@ export class BodyComponent implements OnInit {
               private securityService: SecurityService,
               private tokenStorageService: TokenStorageService,
               private router: Router,
-              private toast: ToastrService) {
+              private toast: ToastrService
+  ) {
     this.categoryService.getAll().subscribe(data => {
       this.categoryList = data;
     });
@@ -94,17 +98,13 @@ export class BodyComponent implements OnInit {
 
   addToCart(product: Product) {
     if (!this.tokenStorageService.getToken()) {
-      Swal.fire({
-        icon: 'error',
-        position: 'top',
-        width:'500px',
-        title: 'Bạn Chưa Đăng Nhập',
-        text: 'Vui lòng đăng nhập để tiếp tục',
-      })
+      alert("vui lòng đăng nhập")
     } else {
       this.oderService.add(product, 37).subscribe(ok => {
-        this.toast.success('Bạn đã xóa học sinh thành công', 'Thông báo', {positionClass: 'toast-top', timeOut: 3000},);
-
+        this.toast.info('Đã thêm giỏ hàng', 'Đã Thêm', {
+          timeOut: 1000,
+          positionClass: 'toast-top-center',
+        });
       });
     }
 

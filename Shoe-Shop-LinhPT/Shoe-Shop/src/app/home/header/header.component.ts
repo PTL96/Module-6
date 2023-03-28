@@ -3,10 +3,9 @@ import {ViewportScroller} from "@angular/common";
 import {TokenStorageService} from "../../service/security/token-storage.service";
 import {SecurityService} from "../../service/security/security.service";
 import {Router} from "@angular/router";
-import {ProductService} from "../../service/product.service";
 import {Product} from "../../entity/product";
-import {Cart} from "../../entity/cart";
-import {ShareService} from "../../service/security/share.service";
+import {OderService} from "../../service/oder.service";
+import {Oder} from "../../entity/oder";
 
 @Component({
   selector: 'app-header',
@@ -18,17 +17,17 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   user: any;
   username = '';
-  searchProduct: Product[] = [];
   role = '';
-  cart: Cart[] = []
   length = 0;
+  count = 0;
+  oder: Oder[] = [];
+  idAccount: any;
+
   constructor(private scroll: ViewportScroller,
               private tokenStorageService: TokenStorageService,
               private securityService: SecurityService,
               private router: Router,
-              private share: ShareService,
-              private productService: ProductService) {
-
+              private oderService: OderService) {
     this.securityService.getIsLoggedIn().subscribe(next => {
       this.isLoggedIn = next;
     });
@@ -39,6 +38,7 @@ export class HeaderComponent implements OnInit {
       this.role = tokenStorageService.getRole()[0];
       console.log(this.role);
     }
+
   }
 
   ngOnInit(): void {
@@ -46,23 +46,21 @@ export class HeaderComponent implements OnInit {
     this.loader()
 
   }
+
   loader() {
     if (this.isLoggedIn) {
-     this.securityService.getProfile(this.tokenStorageService.getIdAccount()).subscribe(
-       next => this.user = next
-     )
+      this.securityService.getProfile(this.tokenStorageService.getIdAccount()).subscribe(
+        next => this.user = next
+      )
     }
   }
+
   @HostListener('window:scroll', ['$event']) onScroll() {
     this.pageYoffSet = window.pageYOffset;
   }
 
-  // tslint:disable-next-line:typedef
   scrollToTop() {
     this.scroll.scrollToPosition([0, 0]);
-  }
-  carCount(){
-
   }
 
   logout() {

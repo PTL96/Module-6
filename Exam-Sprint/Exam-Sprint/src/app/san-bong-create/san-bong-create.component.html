@@ -1,0 +1,68 @@
+<div id="container">
+  <a>
+    <button routerLink="/" type="button" class="btn btn-primary" value="Back"
+            style="float: right; font-size: 16px; margin-top: 57px">Back
+    </button>
+  </a>
+  <h1 style="margin-left: 40%; margin-top: 50px">Thêm Mới Sân Bóng</h1>
+
+  <form class="form" [formGroup]="formCreate" (ngSubmit)="createSanBong()" style="text-align: center">
+
+    <div style="margin-right: 500px; margin-left: 500px; color: white">
+      <div>
+        <label class="form-label animationTop delay-03">Tên Sân:</label><br>
+        <span style="color: red" *ngIf="formCreate.controls.tenSan.hasError('required')&& formCreate.controls.tenSan.touched">Tên sân không được trống.</span>
+        <span style="color: red" *ngIf="formCreate.controls.tenSan.hasError('minlength')&& formCreate.controls.tenSan.touched">Tên sân không được ít hơn 3 ký tự.</span>
+        <span style="color: red" *ngIf="formCreate.controls.tenSan.hasError('maxlength')&& formCreate.controls.tenSan.touched">Tên sân không được quá 50 ký tự.</span>
+        <input class="form-control animationTop delay-04" type="text" placeholder="Nhập tên sân"
+               formControlName="tenSan"/>
+      </div>
+
+        <div>
+          <label class="form-label animationTop delay-05">Khu vực :</label><br>
+          <span style="color: red" *ngIf="formCreate.controls.thongTinSan.hasError('required')&& formCreate.controls.thongTinSan.touched">Vui lòng chọn khu vực.</span><br>
+          <select style="font-size: 15px;" class="animationTop delay-06" formControlName="thongTinSan">
+            <option value="">Khu vực :</option>
+            <option *ngFor="let item of khuVuc" [ngValue]="item">{{item.tenKhuVuc}}</option>
+          </select>
+        </div>
+
+
+
+      <div>
+        <label class="form-label animationTop delay-09">Loại sân :</label><br>
+        <span style="color: red" *ngIf="formCreate.controls.thongTinSan.hasError('required')&& formCreate.controls.thongTinSan.touched">Vui lòng chọn loại sân.</span><br>
+        <select style="font-size: 15px;" class="animationTop delay-11" formControlName="thongTinSan">
+          <option value="">Loại sân :</option>
+          <option *ngFor="let item of loaiSan" [ngValue]="item">{{item.tenLoai}}</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="form-label animationTop delay-11">Khung giờ :</label><br>
+        <span style="color: red" *ngIf="formCreate.controls.thongTinSan.hasError('required')&& formCreate.controls.thongTinSan.touched">Vui lòng chọn khung giờ.</span><br>
+        <select style="font-size: 15px;" class="animationTop delay-12" formControlName="thongTinSan">
+          <option value="">Khung giờ :</option>
+          <option *ngFor="let item of thongTinSan" [ngValue]="item">{{item.khungGio}}</option>
+        </select>
+      </div>
+
+
+      <div>
+        <label class="form-label animationTop delay-07">Địa chỉ: </label><br>
+        <span style="color: red" *ngIf="formCreate.controls.diaChi.hasError('required')&& formCreate.controls.diaChi.touched">Địa chỉ không được trống.</span>
+        <span style="color: red" *ngIf="formCreate.controls.diaChi.hasError('minlength')&& formCreate.controls.diaChi.touched">Địa chỉ không ít hơn 3 ký tự.</span>
+        <span style="color: red" *ngIf="formCreate.controls.diaChi.hasError('maxlength')&& formCreate.controls.diaChi.touched">Địa chỉ không được vượt 50 ký tự.</span>
+
+        <input class="form-control animationTop delay-08" type="text" placeholder="Nhập địa chỉ"
+               formControlName="diaChi"/>
+      </div>
+
+
+    <div style="text-align: center">
+      <input type="submit" value="Save" class="m-3 btn btn-info animationTop delay-13">
+    </div>
+    </div>
+  </form>
+  <div class="snow"></div>
+</div>

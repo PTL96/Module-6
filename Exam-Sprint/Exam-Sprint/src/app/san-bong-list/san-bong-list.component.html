@@ -1,0 +1,79 @@
+<div id="container">
+  <a>
+    <button routerLink="/create" type="button" class="btn btn-primary animationTop delay-01" value="Add New"
+            style="float: right; font-size: 16px; margin-top: 57px">Thêm mới
+    </button>
+  </a>
+  <div>
+    <form class="d-flex animationTop delay-02" role="search" style="float: left; font-size: 17px; margin-top: 57px">
+      <input class="form-control me-2" name="names" type="search" placeholder="Search name" aria-label="Search" #name>
+      <select class="form-select animationTop delay-03" aria-label="Default select example" name="customer_type"
+              style="padding-right: 10px" #khuVuc>
+        <option selected value="">Khu vực:</option>
+        <option value="Diamond">Sơn Trà</option>
+        <option value="Platinum">Hải Châu</option>
+        <option value="Gold">Ngũ Hành Sơn</option>
+        <option value="Silver">Liên Chiểu</option>
+      </select>
+<!--      <button style="margin-left: 10px" class="btn btn-primary animationTop delay-04" type="submit"-->
+<!--              (click)="search(name.value, customerType.value)">Search-->
+<!--      </button>-->
+    </form>
+  </div>
+  <h1 style="margin-left: 45%; margin-top: 53px">Danh Sách Sân Bóng</h1>
+  <table class="table table-hover" style="text-align: center">
+    <thead>
+    <tr class="animationTop delay-05">
+      <th>#</th>
+      <th>Tên sân</th>
+      <th>Loại sân</th>
+      <th>Khu vực</th>
+      <th>Địa chỉ</th>
+      <th>Khung giờ thuê</th>
+      <th>Giá thuê</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="text-align: center" *ngFor="let item of sanBong index as i"
+        class="animationTop delay-06">
+      <td class="animationTop delay-07">{{i+1}}</td>
+      <td class="animationTop delay-07">{{item.tenSan}}</td>
+      <td class="animationTop delay-07" *ngIf="item.thongTinSan">{{item.thongTinSan.loaiSans.tenLoai}}</td>
+      <td class="animationTop delay-07" *ngIf="item.thongTinSan">{{item.thongTinSan.khuVuc.tenKhuVuc}}</td>
+      <td class="animationTop delay-07">{{item.diaChi}}</td>
+      <td class="animationTop delay-07"*ngIf="item.thongTinSan">{{item.thongTinSan.khungGio}}</td>
+      <td class="animationTop delay-07"*ngIf="item.thongTinSan">{{item.thongTinSan.giaThue}}</td>
+
+
+      <td>
+        <a class="btn btn-danger animationTop delay-09" type="button"
+           data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size: 14px" (click)="temp=item">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="snow"></div>
+
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content"
+         style="background-image: linear-gradient(to top,  #B5B5B5, #B5B5B5,#8273B0); overflow:hidden;">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="exampleModalLabel">Xóa thông tin sản phẩm</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5 style="color:red">Delete customer ?<br> {{temp.tenSan}}</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-primary" (click)="deleteSanBong(temp.id)" data-bs-dismiss="modal">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

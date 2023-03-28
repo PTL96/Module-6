@@ -6,8 +6,6 @@ import {ViewportScroller} from "@angular/common";
 import {SizeService} from "../../service/size.service";
 import {Size} from "../../entity/size";
 import {TokenStorageService} from "../../service/security/token-storage.service";
-import {Cart} from "../../entity/cart";
-import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-shoe-detail',
@@ -18,8 +16,6 @@ export class ShoeDetailComponent implements OnInit {
   temp: Product = {};
   pageYoffSet = 0;
   size: Size[] = [];
-  // cart: Cart = {price: 0, quantitys: 0};
-  carts: Cart[] = [];
   private id = 0;
 
   constructor(private productService: ProductService,

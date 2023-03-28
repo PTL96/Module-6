@@ -1,52 +1,45 @@
-import {Component, HostListener, OnInit} from "@angular/core";
-import {Cart} from "../../entity/cart";
+import {Component, HostListener, OnDestroy, OnInit, ViewContainerRef} from "@angular/core";
 import {ViewportScroller} from "@angular/common";
 import {ShareService} from "../../service/security/share.service";
 import {TokenStorageService} from "../../service/security/token-storage.service";
+import {OderService} from "../../service/oder.service";
+import {OderView} from "../../entity/oder-view";
+import {TotalPrice} from "../../entity/total-price";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
   selector: 'app-cart-list',
-  templateUrl: './oder-list.component.html',
+  templateUrl: 'oder-list.component.html',
   styleUrls: ['./oder-list.component.css']
 })
 
 
 export class OderListComponent implements OnInit {
   pageYoffSet = 0;
-  cart: Cart[] = []
+  oderView: OderView[] = [];
   length = 0;
-  quantitys = 1
-  total = 0;
-totalProduct = 0;
+  idAccount: any;
+  totalPrice: TotalPrice = {};
+  count = 0;
+
   constructor(private scroll: ViewportScroller,
               private share: ShareService,
-              private tokenStorageService: TokenStorageService) {
-
-  }
+              private tokenStorageService: TokenStorageService,
+              private oderService: OderService,
+              public toast: ToastrService,
+              ) {}
 
   ngOnInit(): void {
     window.scrollTo(0, 690)
-    // if (this.tokenStorageService.getCart() == undefined) {
-    // } else {
-    //   this.cart = this.tokenStorageService.getCart();
-    //   this.loading()
-    //   this.length = this.cart.length
-    // }
+    if (this.tokenStorageService.getToken()) {
+      this.idAccount = this.tokenStorageService.getIdAccount()
+      console.log(this.idAccount)
+    }
+    this.getALlOder();
+    this.getTotalPrice();
   }
 
-
-  // loading() {
-  //   this.quantitys = 1;
-  //   this.total = 0;
-  //   for (let i = 0; i < this.cart.length; i++) {
-  //     this.quantitys += this.cart[i].quantitys
-  //     this.total += (this.cart[i].quantitys * this.cart[i].price)
-  //     // this.totalProduct = (this.oder[i].quantitys * this.oder[i].price)
-  //     console.log(this.total)
-  //     console.log(this.cart[i].quantitys)
-  //   }
-  // }
 
   @HostListener('window:scroll', ['$event']) onScroll() {
     this.pageYoffSet = window.pageYOffset;
@@ -56,30 +49,28 @@ totalProduct = 0;
     window.scrollTo(0, 690)
   }
 
+  getALlOder() {
+    this.oderService.getAll(this.idAccount).subscribe(data => {
+      this.oderView = data;
+      console.log(this.oderView)
+    })
+  }
 
-  // delete(id: number) {
-  //   this.cart.splice(id)
-  //   this.tokenStorageService.setCart(this.cart)
-  //   this.loading()
-  // }
-  //
-  // upQuantity(index: number) {
-  //   this.cart[index].quantitys += 1;
-  //   this.tokenStorageService.setCart(this.cart)
-  //   this.loading();
-  //   this.share.sendClickEvent()
-  // }
-  //
-  // downQuantity(index: number) {
-  //   if (this.cart[index].quantitys == 1) {
-  //     this.cart.splice(index, 1)
-  //   } else {
-  //     this.cart[index].quantitys -= 1;
-  //   }
-  //   this.tokenStorageService.setCart(this.cart)
-  //   this.loading();
-  //   this.share.sendClickEvent()
-  // }
+  getTotalPrice() {
+    this.oderService.getAllTotalPrice(this.idAccount).subscribe(ok => {
+      this.totalPrice = ok;
+    })
+  }
 
+  deleteOder(id: number | undefined) {
+    if (this.oderView != null)
+      this.oderService.delete(id).subscribe(deteted => {
+        this.toast.info('Đã xóa khỏi giỏ hàng', 'Đã Xóa', {
+          timeOut: 1000,
+          positionClass: 'toast-top-center',
+        });
+        this.ngOnInit();
+      })
+  }
 
 }

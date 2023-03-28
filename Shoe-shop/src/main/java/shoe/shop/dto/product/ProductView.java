@@ -13,6 +13,5 @@ public interface ProductView {
     Double getQuantity();
     Account getAccount();
     Product getProduct();
-    int getProductSize();
 
 }

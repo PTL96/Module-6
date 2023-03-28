@@ -1,4 +1,5 @@
 package demo;
 
-public interface IDocter {
+public interface IDoctor extends IStudent, ITeacher{
+
 }

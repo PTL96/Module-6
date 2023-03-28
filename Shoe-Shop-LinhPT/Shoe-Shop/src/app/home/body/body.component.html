@@ -87,11 +87,12 @@
 <div>
 
   <div>
-    <div class="rowabc">
+    <div class="rowabc" *ngIf="pageSize.length != 0, else emptyCart">
       <div class="carda col-3a" *ngFor="let item of pageSize">
         <div class="my-card" style="margin-left: 60px">
           <img [src]="item.avatar" class="my-card-img"/>
           <div class="my-card-body">
+
             <a class="buton-mn" *ngIf="role =='ROLE_ADMIN'">
            <i class="fa-regular fa-trash-can fa-bounce fa-xl"
                          style="color: #fc0b0b; float: right; padding-bottom: 70px; margin-right: 15px; cursor: pointer"></i>
@@ -164,10 +165,8 @@
     </div>
   </div>
 </div>
-
-
 </body>
 <ng-template #emptyCart>
-  <h3 style="color: red; text-align: center">Chưa có sản phẩm nào trong giỏ hàng <span style="font-size: 35px">😢</span>
+  <h3 style="color: red; text-align: center">Không tìm thấy sản phẩm nào <span style="font-size: 35px">😢</span>
   </h3>
 </ng-template>

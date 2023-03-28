@@ -19,7 +19,7 @@ table{
   flex-wrap: wrap;
 }
 th{
-  text-align: left;
+  text-align: center;
   padding: 5px;
   color: #fff;
   background: #ff523b;
@@ -28,9 +28,11 @@ th{
 img{
   width: 200px;
   height: 200px;
+
 }
 td{
   padding: 10px 5px;
+  text-align: center;
 }
 td input{
   width: 45px;
@@ -46,6 +48,7 @@ td img{
   height: 120px;
   margin-right: 10px;
   background-size: cover;
+
 }
 .total-price{
   display: flex;
@@ -70,6 +73,7 @@ th:last-child{
   margin: 30px 0;
   border-radius: 30px;
   transition: background 0.5s;
+  width: 150px;
 }
 .btn1{
   display: inline-block;
@@ -91,9 +95,8 @@ a{
   display: inline-block;
   background: #FF523b;
   color: #fff;
-  padding: 4px 7px;
  margin-right: 10px;
-  border-radius: 30px;
+  font-size: small;
   transition: background 0.5s;
   cursor: pointer;
 }
@@ -101,18 +104,22 @@ a{
   display: inline-block;
   background: #FF523b;
   color: #fff;
-  padding: 4px 7px;
-  border-radius: 30px;
   transition: background 0.5s;
   margin-left: 10px;
   cursor: pointer;
+  font-size: small;
+
 }
 
-.quantity {
+.quantity{
   border: 1px solid #ff523b;
   padding: 5px;
+  text-align: center;
+
 }
 
 .quantity:focus {
   outline: none;
+  width: 50px;
+  height: 30px;
 }

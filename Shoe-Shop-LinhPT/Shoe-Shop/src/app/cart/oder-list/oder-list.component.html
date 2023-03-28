@@ -5,49 +5,35 @@
     <tr>
       <th>Sản phẩm</th>
       <th>Số lượng</th>
-      <th>Size</th>
+<!--      <th>Size</th>-->
       <th>Giá tiền</th>
     </tr>
 </thead>
-  <tbody *ngIf="cart.length > 0; else emptyCart">
-      <tr *ngFor="let temp of cart; index as i">
+  <tbody *ngIf="oderView.length > 0; else emptyCart">
+      <tr *ngFor="let temp of oderView; index as i">
         <td>
           <div class="cart-info">
-            <img src="{{temp.imageProduct}}"/>
+            <img src="{{temp.avatarProduct}}"/>
             <div>
               <p>{{temp.nameProduct}}</p>
-              <small>{{temp.price | number:'1.0-0'}} VNĐ</small><br>
-<!--              <a style="cursor: pointer" ">Xóa khỏi giỏ</a>-->
+              <small>{{temp.priceProduct | number:'1.0-0'}} VNĐ</small><br>
+              <a style="cursor: pointer" (click)="deleteOder(temp.oderId)">Xóa khỏi giỏ</a>
             </div>
           </div>
         </td>
         <td>
-          <button class="btn3 btn-link px-2"
-                  (click)="(i)">
-            <i class="fas fa-minus"></i>
-          </button>
-          <input class="quantity" readonly type="number" [value]="temp.quantity" >
-          <button class="btn4 btn-link px-2"
-                  (click)="(i)" >
-            <i class="fas fa-plus"></i>
-          </button>
+          <input class="quantity" value="1" type="number" style="width: 50px; height: 30px" [value]="temp.quantity">
         </td>
-        <td></td>
-        <td>{{totalProduct | number:'1.0-0'}} VNĐ</td>
+        <td>{{temp.totalPrice | number:'1.0-0'}} VNĐ</td>
       </tr>
   </tbody>
   </table>
 
   <div class="total-price">
     <table>
-<!--      <tr>-->
-<!--        <td>Thành tiền</td>-->
-<!--        <td>7.950.000đ</td>-->
-<!--      </tr>-->
-
       <tr>
         <td style="color: red">Tổng thanh toán:</td>
-        <td style="color: red">{{total | number:'1.0-0'}} VNĐ</td>
+        <td style="color: red">{{totalPrice.totalPrice | number:'1.0-0'}} VNĐ</td>
       </tr>
     </table>
   </div>

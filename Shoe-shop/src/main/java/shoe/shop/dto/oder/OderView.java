@@ -1,10 +1,10 @@
 package shoe.shop.dto.oder;
 
 public interface OderView {
-    int getSize();
-
     Long getOderId();
-Long getProductId();
+
+    Long getProductId();
+
     String getNameProduct();
 
     double getPriceProduct();
@@ -17,6 +17,6 @@ Long getProductId();
 
     double getTotalPrice();
 
-    double getTotal();
-    double getSizes();
+    int getSizes();
+
 }

@@ -1,4 +1,3 @@
-import {Product} from "./product";
 
 export interface Oder {
   oderId?:number;
@@ -9,4 +8,6 @@ export interface Oder {
   account_id?:string;
   product_id?:number;
   priceProduct?:number
+  totalPrice?: number;
+  total?:number
 }

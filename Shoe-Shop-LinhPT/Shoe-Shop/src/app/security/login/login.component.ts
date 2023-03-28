@@ -6,7 +6,6 @@ import {ToastrService} from "ngx-toastr";
 import {ViewportScroller} from "@angular/common";
 import {ShareService} from "../../service/security/share.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -62,25 +61,20 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('/');
           }
           this.loginForm.reset();
-          Swal.fire({
-            position: 'top',
-            icon: 'success',
-            title: 'Đăng nhập thành công',
-            width:'500px',
-            showConfirmButton: false,
-            timer: 1500
-          })
+
+          this.toast.info('Đã đăng nhập', 'Thành Công', {
+            timeOut: 1000,
+            positionClass: 'toast-top-center',
+          });
           window.scrollTo(0,0)
         }, error => {
 
           if(error.status == 406){
             this.errorMessage = error.error.message;
-            Swal.fire({
-              icon: 'error',
-              title: 'Đăng Nhập Thất Bại',
-              text: 'Sai tên tài khoản hoặc mật khẩu !',
-              footer: 'Vui lòng kiểm tra lại thông tin !'
-            })
+            this.toast.error('Vui lòng kiểm tra thông tin tài khoản', 'Thất bại', {
+              timeOut: 1000,
+              positionClass: 'toast-top-center'
+            });
           }
           this.securityService.isLoggedIn = false;
           if(error.error.errors){

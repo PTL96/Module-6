@@ -1,5 +1,7 @@
-package model;
+package demo;
+
+
 
 public interface IStudent {
-    public
+    public String name();
 }

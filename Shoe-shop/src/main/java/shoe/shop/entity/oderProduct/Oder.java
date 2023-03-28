@@ -18,6 +18,7 @@ public class Oder {
     private int quantity;
     private int sizes;
     private int totalPrice;
+    private int total;
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
@@ -110,5 +111,13 @@ public class Oder {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }

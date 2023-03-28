@@ -8,7 +8,6 @@ import {ToastrService} from "ngx-toastr";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {Router} from "@angular/router";
-import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-shoe-create',
@@ -69,13 +68,8 @@ export class ShoeCreateComponent implements OnInit {
           };
           console.log(url)
           this.productService.save(product).subscribe(ok => {
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Thêm mới thành công',
-              showConfirmButton: false,
-              timer: 1500
-            })
+
+
             this.createForm.reset();
           });
         });
