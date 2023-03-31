@@ -21,4 +21,6 @@ public interface IOderService {
     void deleteOder(Long id);
 
     Oder finByAccountIdProductId(Long accountId, Long productId);
+
+    void updateOder(Long id, int quantity);
 }

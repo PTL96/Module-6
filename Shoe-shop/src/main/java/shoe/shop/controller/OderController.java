@@ -3,6 +3,7 @@ package shoe.shop.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import shoe.shop.service.impl.OderService;
 
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 @Controller
@@ -35,10 +38,10 @@ public class OderController {
         Long productId = oderDto.getProduct_id();
         Long accountId = oderDto.getAccount_id();
         Oder check = oderService.finByAccountIdProductId(accountId, productId);
-        if (check != null){
-            check.setQuantity(check.getQuantity()+oderDto.getQuantity());
+        if (check != null) {
+            check.setQuantity(check.getQuantity() + oderDto.getQuantity());
             oderService.save(check);
-        }else {
+        } else {
             Oder oder = new Oder();
             BeanUtils.copyProperties(oderDto, oder);
             oderDto.setQuantity(oderDto.getQuantity());
@@ -63,6 +66,35 @@ public class OderController {
         }
         return new ResponseEntity<>(oderViewList, HttpStatus.OK);
     }
+
+    @GetMapping("update")
+    public ResponseEntity<Oder> update(@RequestParam("id") Long id, @RequestParam("quantity") int quantity){
+        Oder oder = oderService.findById(id);
+        if (id == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        oderService.updateOder(id, quantity);
+        return new ResponseEntity<>(oder, HttpStatus.OK);
+    }
+
+
+
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Object> updateOderQuantity(@PathVariable Long id, @RequestBody Map<String, Object> payload) {
+//        int quantity = (int) payload.get("quantity");
+//
+//        Optional<Oder> optionalOder = Optional.ofNullable(oderService.findById(id));
+//        if (!optionalOder.isPresent()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        Oder oder = optionalOder.get();
+//        oder.setQuantity(quantity);
+//
+//        oderService.save(oder);
+//
+//        return ResponseEntity.ok().build();
+//    }
 
 
     @DeleteMapping("delete{id}")

@@ -50,5 +50,10 @@ public class OderService implements IOderService {
         return iOderRepository.findAllByAccount_AccountIdAndProduct_ProductId(accountId, productId);
     }
 
+    @Override
+    public void updateOder(Long id, int quantity) {
+        iOderRepository.updateOder(id, quantity);
+    }
+
 
 }
