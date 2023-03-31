@@ -55,8 +55,9 @@ header ul li{
   margin-top: 150px;
   display: grid;
   grid-template-columns: 60% 40%;
-  border-bottom: 1px solid #dce1e4;
+  border-bottom: 1px solid #f14646;
   padding-bottom: 50px;
+
 }
 .banner .content{
   text-align: justify;
@@ -65,6 +66,7 @@ header ul li{
 .banner .content h1{
   font-size: 4.5em;
   margin: 0;
+
 }
 .gradientText{
   display: inline-block;
@@ -134,7 +136,7 @@ header ul li{
   z-index: -1;
   bottom: 0;
   border-radius: 10px;
-  box-shadow: var(--box-shadow);
+  /*box-shadow: var(--box-shadow);*/
 }
 .banner img{
   width: 90%;
@@ -148,29 +150,7 @@ header input{
   text-align: center;
   padding-top: 100px;
 }
-.listSkill{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px 20px;
-  border-bottom: 1px solid #dce1e4;
-  padding-bottom: 50px;
-}
-.listSkill .evaluate{
-  width: 100%;
-  height: 20px;
-  box-shadow: var(--box-shadow);
-  border-radius: 10px;
-  margin-top: 20px;
-  position: relative;
-}
-.listSkill .evaluate::before{
-  position: absolute;
-  height: 100%;
-  width: var(--point);
-  background-image: var(--gradient-bg);
-  content: '';
-  border-radius: 10px;
-}
+
 .listProject{
   display: grid;
   grid-template-columns: repeat(3, 1fr);

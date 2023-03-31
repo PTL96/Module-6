@@ -9,19 +9,39 @@
   </div>
   <input type="checkbox" id="menu">
   <ul class="nav">
-
     <label for="menu">
       <i class="fa-solid fa-xmark"></i>
     </label>
     <li><a href="#home">Trang Chủ</a></li>
     <li><a href="#skill">Lịch Sử Mua Hàng</a></li>
-    <li><a href="#project">Kho Hàng</a></li>
-    <li><a href="#contact">Thêm Mới Sản Phẩm</a></li>
-    <li>
+    <li><a href="#skill">Quản Lý Sản Phẩm</a></li>
+    <li><i class="fa-solid fa-cart-shopping fa-bounce" style="font-size: 30px"></i></li>
+
+      <div style="display: flex">
       <div class="logo">
-        <img src="https://raw.githubusercontent.com/HoanghoDev/portfolio/main/logo.png">
+        <img class="account" src="{{user?.avatar}}">
       </div>
-    </li>
+        <li>
+          <div class="dropdown" *ngIf="isLoggedIn">
+            <button class="dropbtn">{{user.name}}</button>
+            <!--          <img src="{{user?.avatar}}" style="width: 30px; height: 30px; border-radius: 50%">-->
+            <div class="dropdown-content">
+              <!--            <img src="{{user?.avatar}}" style="width: 40px; background-image: none; border-radius: 50%; height: 40px" height="24" width="24" >-->
+              <a href="#">Thông tin cá nhân</a>
+              <a href="#">Đổi mật khẩu</a>
+              <a (click)="logout()">Đăng xuất</a>
+            </div>
+          </div>
+          <!--        <i class="fa-solid fa-angle-down"></i>-->
+        </li>
+</div>
+
+
+
+
+
+    <li><a routerLink="/security" *ngIf="!isLoggedIn">Đăng Nhập</a></li>
+
   </ul>
 </header>
 </body>

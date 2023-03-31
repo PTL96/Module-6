@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
               private scroll: ViewportScroller) { }
 
   ngOnInit(): void {
-    window.scrollTo(0,690)
+    window.scrollTo(0,0)
   }
 
   login(){
@@ -60,14 +60,13 @@ export class LoginComponent implements OnInit {
           }
           this.loginForm.reset();
 
-           alert("")
+        alert("")
           window.scrollTo(0,0)
         }, error => {
 
           if(error.status == 406){
             this.errorMessage = error.error.message;
-
-            alert("")
+           alert("")
           }
           this.securityService.isLoggedIn = false;
           if(error.error.errors){
