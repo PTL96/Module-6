@@ -1,0 +1,58 @@
+<div class="container" style="min-height: 120vh; margin-top: 50px">
+  <div class="title">
+    <h2>THÔNG TIN MUA HÀNG</h2>
+  </div>
+  <div class="d-flex">
+    <form action="" method="">
+      <label>
+        <span class="fname">Họ và tên <span class="required">*</span></span>
+        <input type="text" name="fname">
+      </label>
+      <label>
+        <span class="lname">Ngày sinh<span class="required">*</span></span>
+        <input type="date" name="lname" style="width: 60%; height: 35px">
+      </label>
+
+      <label>
+        <span>CMND/CCCD <span class="required">*</span></span>
+        <input type="number" name="houseadd" placeholder="" required style="width: 60%">
+      </label>
+      <label>
+        <span>Số điện thoại <span class="required">*</span></span>
+        <input type="number" name="city" style="width: 60%">
+      </label>
+      <label>
+        <span>Email <span class="required">*</span></span>
+        <input type="text" name="city">
+      </label>
+
+      <label>
+        <span>Địa chỉ<span class="required">*</span></span>
+        <textarea class="textarea"></textarea>
+      </label>
+      <label>
+      <div style="width: 385px; margin-left: 160px" id="myPaypalButtons"></div>
+      </label>
+    </form>
+
+    <div class="Yorder" style="min-height: 700px">
+      <table style="min-height: 400px">
+        <tr>
+          <th colspan="2">Sản phẩm đã đặt</th>
+        </tr>
+        <tbody *ngFor="let item of oderView | paginate:{itemsPerPage:3, currentPage: p}">
+        <tr>
+          <img style="width: 100px; height: 100px" src="{{item.avatarProduct}}"><br>
+          <td>{{item.nameProduct}}</td>
+          <td>x{{item.quantity}}</td>
+          <td>{{item.totalPrice| number:'1.0-0'}}VNĐ</td>
+        </tr>
+        </tbody>
+      </table><br>
+      <pagination-controls (pageChange)="p=$event" style="font-size: small"></pagination-controls>
+<h5>Tổng thanh toán:</h5>
+      <p style="color: red">{{USDTotal/23000 | currency:'USD'}}</p>
+<!--      <button type="button">Place Order</button>-->
+    </div>
+  </div>
+</div>

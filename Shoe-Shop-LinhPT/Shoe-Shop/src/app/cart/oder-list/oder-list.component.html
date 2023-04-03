@@ -1,46 +1,54 @@
-
-<div class="small-container cart-page" style="min-height: 60vh">
+<div class="small-container cart-page" style="height: auto">
+  <a routerLink="/" class="btn" style="float: right" (click)="scrollProductBack()">Mua tiếp</a>
   <table>
-<thead>
+    <thead>
     <tr>
       <th>Sản phẩm</th>
       <th>Số lượng</th>
-<!--      <th>Size</th>-->
+      <!--      <th>Size</th>-->
       <th>Giá tiền</th>
     </tr>
-</thead>
-  <tbody *ngIf="oderView.length > 0; else emptyCart">
-      <tr *ngFor="let temp of oderView; index as i">
-        <td>
-          <div class="cart-info">
-            <img src="{{temp.avatarProduct}}"/>
-            <div>
-              <p>{{temp.nameProduct}}</p>
-              <small>{{temp.priceProduct | number:'1.0-0'}} VNĐ</small><br>
-              <a style="cursor: pointer" (click)="deleteOder(temp.oderId)">Xóa khỏi giỏ</a>
-            </div>
+    </thead>
+    <tbody *ngIf="oderView.length > 0; else emptyCart">
+    <tr *ngFor="let temp of oderView | paginate:{itemsPerPage: 5,currentPage:p}, index as i">
+      <td>
+        <div class="cart-info">
+          <img src="{{temp.avatarProduct}}"/>
+          <div>
+            <p>{{temp.nameProduct}}</p>
+            <small>{{temp.priceProduct | number:'1.0-0'}} VNĐ</small><br>
+            <a style="cursor: pointer" (click)="deleteOder(temp.oderId)">Xóa khỏi giỏ</a>
           </div>
-        </td>
-        <td>
-          <input class="quantity" value="1" type="number" style="width: 50px; height: 30px" [value]="temp.quantity">
-        </td>
-        <td>{{temp.totalPrice | number:'1.0-0'}} VNĐ</td>
-      </tr>
-  </tbody>
+        </div>
+      </td>
+      <td>
+
+        <input class="quantity" [value]="temp.quantity" #qty type="number" style="width: 50px; height: 30px"  (change)="changeQuantity(temp.oderId, qty.value)">
+
+      </td>
+      <td>{{temp.totalPrice | number:'1.0-0'}} VNĐ</td>
+    </tr>
+    </tbody>
   </table>
+
+  <pagination-controls (pageChange)="p=$event"></pagination-controls>
 
   <div class="total-price">
     <table>
       <tr>
         <td style="color: red">Tổng thanh toán:</td>
-        <td style="color: red">{{totalPrice.totalPrice | number:'1.0-0'}} VNĐ</td>
+        <td style="color: red">{{USDTotal | number:'1.0-0'}} VNĐ =</td>
+        <td style="color: red">{{USDTotal/23000 | number:'1.0-0'}}$</td>
       </tr>
     </table>
   </div>
-   <a href="#" class="btn1" style="float: right">Thanh toán</a>
-   <a routerLink="/" class="btn" style="float: right; margin-right: 95px" (click)="scrollProductBack()">Mua tiếp</a>
-</div>
 
+  <a class="btn1" type="button" style="float: right" routerLink="/cart/payment">Thanh toán</a>
+  <p style="color: red">* Quý khách vui lòng nhập đúng địa chỉ khi thanh toán<br> để thuận tiện cho việc giao hàng !</p>
+
+</div>
 <ng-template #emptyCart>
-  <h3 style="color: red; text-align: center">Chưa có sản phẩm nào trong giỏ hàng <span style="font-size: 35px">😢</span></h3>
+  <h3 style="color: red; text-align: center">Chưa có sản phẩm nào trong giỏ hàng <span style="font-size: 35px">😢</span>
+  </h3>
 </ng-template>
+

@@ -12,6 +12,7 @@ import {environment} from "../environments/environment";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {CommonModule} from "@angular/common";
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {CommonModule} from "@angular/common";
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "myFile"),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

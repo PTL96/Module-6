@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable, throwError} from "rxjs";
 import {Oder} from "../entity/oder";
 import {Product} from "../entity/product";
@@ -31,7 +31,7 @@ export class OderService {
     return this.httpClient.post<Oder>(this.URL_ODER + '/addToCart', oder);
   }
 
-  getAll(idAccount: number): Observable<Oder[]> {
+  getAll(idAccount: any): Observable<Oder[]> {
 
     return this.httpClient.get<Oder[]>(this.URL_ODER + '?idAccount=' + idAccount);
   }
@@ -42,6 +42,15 @@ export class OderService {
 
   delete(id: number | undefined): Observable<Oder> {
     return this.httpClient.delete<Oder>(this.URL_ODER + '/delete' + id)
+  }
+
+
+  update(id: number, quantity: number) {
+    return this.httpClient.get(this.URL_ODER + '/update?id=' + id + '&quantity=' + quantity)
+  }
+
+  payment(id: number): Observable<any> {
+    return this.httpClient.put(this.URL_ODER + '/payment', id)
   }
 
 }

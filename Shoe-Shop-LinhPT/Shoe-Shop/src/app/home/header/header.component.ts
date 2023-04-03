@@ -6,6 +6,8 @@ import {Router} from "@angular/router";
 import {Product} from "../../entity/product";
 import {OderService} from "../../service/oder.service";
 import {Oder} from "../../entity/oder";
+import firebase from "firebase";
+import User = firebase.User;
 
 @Component({
   selector: 'app-header',
@@ -17,6 +19,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   user: any;
   username = '';
+  name = "";
   role = '';
   length = 0;
   count = 0;
@@ -33,12 +36,15 @@ export class HeaderComponent implements OnInit {
     });
     this.securityService.getUserLoggedIn().subscribe(next => {
       this.user = next;
+      this.name = next.name;
     });
     if (tokenStorageService.getRole()) {
       this.role = tokenStorageService.getRole()[0];
       console.log(this.role);
     }
-
+this.oderService.getAll(this.tokenStorageService.getIdAccount()).subscribe(ok=>{
+  this.oder = ok;
+})
   }
 
   ngOnInit(): void {

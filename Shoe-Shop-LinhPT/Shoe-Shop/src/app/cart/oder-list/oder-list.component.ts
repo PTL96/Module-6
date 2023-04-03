@@ -6,7 +6,7 @@ import {OderService} from "../../service/oder.service";
 import {OderView} from "../../entity/oder-view";
 import {TotalPrice} from "../../entity/total-price";
 import {ToastrService} from "ngx-toastr";
-
+import {render} from "creditcardpayments/creditCardPayments";
 
 @Component({
   selector: 'app-cart-list',
@@ -21,14 +21,20 @@ export class OderListComponent implements OnInit {
   length = 0;
   idAccount: any;
   totalPrice: TotalPrice = {};
-  count = 0;
+  p = 0;
+  USDTotal: any = 0;
+  quantity: any;
 
   constructor(private scroll: ViewportScroller,
               private share: ShareService,
               private tokenStorageService: TokenStorageService,
               private oderService: OderService,
-              public toast: ToastrService,
-              ) {}
+              public toast: ToastrService) {
+    this.share.getClickEvent().subscribe(next=>{
+      this.getALlOder();
+      this.getTotalPrice();
+    })
+  }
 
   ngOnInit(): void {
     window.scrollTo(0, 690)
@@ -59,6 +65,20 @@ export class OderListComponent implements OnInit {
   getTotalPrice() {
     this.oderService.getAllTotalPrice(this.idAccount).subscribe(ok => {
       this.totalPrice = ok;
+      this.USDTotal = (ok.totalPrice);
+      // render(
+      //   {
+      //     id: "#myPaypalButtons",
+      //     currency: "USD",
+      //     value: (this.USDTotal / 23000).toFixed(2),
+      //     onApprove: (details) => {
+      //       this.toast.info('Thanh toán thành công', 'Thành Công', {
+      //         timeOut: 1000,
+      //         positionClass: 'toast-top-center',
+      //       });
+      //     }
+      //   }
+      // )
     })
   }
 
@@ -73,4 +93,10 @@ export class OderListComponent implements OnInit {
       })
   }
 
+  changeQuantity(oderId: any, qty: string) {
+    this.oderService.update(oderId, parseInt(qty)).subscribe(next => {
+      this.share.sendClickEvent();
+    })
+
+  }
 }

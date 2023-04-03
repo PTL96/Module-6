@@ -1,14 +1,52 @@
 public class Test {
+    void readCard(int cardNo) throws Exception{
+        System.out.println("Reading Card");
+    }
+    void checkCard(int cardNo) throws RuntimeException{   //line 1
+        System.out.println("Checking Card");
+    }
+    public static void main(String[] args){
+        Test ex = new Test();
+        int cardNo = 12344;
+        ex.checkCard(cardNo); //line 2
+        ex.readCard(cardNo); //line 3
 
-    public static void main(String[] args) {
-        int soThuNhat = 0;
-        int soThuHai = 1;
-        int soThuN;
-        for (int i = 0; i < 100; i++) {
-            soThuN = soThuNhat + soThuHai;
-            soThuNhat = soThuHai;
-            soThuHai = soThuN;
-        }
-        System.out.println(soThuNhat);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    void readCard(int cardNo) throws Exception {
+//        System.out.println("Reading Card");
+//    }
+//
+//    void checkCard(int cardNo) throws RuntimeException {   //line 1
+//        System.out.println("Checking Card");
+//    }
+//
+//    public static void main(String[] args) {
+//        Test ex = new Test();
+//        int cardNo = 12344;
+//        try {
+//            ex.readCard(cardNo); //line 3
+//
+//        } catch (Exception e) {
+//            System.out.println("Error: " + e.getMessage());
+//        }
+//
+//        ex.checkCard(cardNo); //line 2
+//
     }
 }

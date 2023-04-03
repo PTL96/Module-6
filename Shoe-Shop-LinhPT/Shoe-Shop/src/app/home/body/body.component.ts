@@ -10,7 +10,6 @@ import {Component, HostListener, OnInit} from "@angular/core";
 import {ViewportScroller} from "@angular/common";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
-import {BehaviorSubject} from "rxjs";
 
 
 @Component({
@@ -19,9 +18,6 @@ import {BehaviorSubject} from "rxjs";
   styleUrls: ['./body.component.css']
 })
 export class BodyComponent implements OnInit {
-  private itemsInCartSubject = new BehaviorSubject<number>(0);
-  public itemsInCart$ = this.itemsInCartSubject.asObservable();
-
 
   pageSize: ProductDto[] = [];
   size: number = 0;
@@ -98,7 +94,11 @@ export class BodyComponent implements OnInit {
 
   addToCart(product: Product) {
     if (!this.tokenStorageService.getToken()) {
-      alert("vui lòng đăng nhập")
+      this.toast.warning('Vui lòng đăng nhập', 'Hãy Đăng Nhập', {
+        timeOut: 1000,
+        positionClass: 'toast-top-center',
+      });
+      this.router.navigateByUrl('/security')
     } else {
       this.oderService.add(product, 37).subscribe(ok => {
         this.toast.info('Đã thêm giỏ hàng', 'Đã Thêm', {
@@ -106,6 +106,7 @@ export class BodyComponent implements OnInit {
           positionClass: 'toast-top-center',
         });
       });
+
     }
 
   }
