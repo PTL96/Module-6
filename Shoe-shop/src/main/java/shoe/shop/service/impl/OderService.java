@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shoe.shop.dto.oder.OderView;
 import shoe.shop.dto.oder.TotalPrice;
+import shoe.shop.entity.account.Account;
 import shoe.shop.entity.oderProduct.Oder;
 import shoe.shop.repository.IOderRepository;
 import shoe.shop.repository.IProductRepository;
@@ -37,7 +38,7 @@ public class OderService implements IOderService {
 
     @Override
     public Oder findById(Long id) {
-        return iOderRepository.findById(id).get();
+        return iOderRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -55,5 +56,15 @@ public class OderService implements IOderService {
         iOderRepository.updateOder(id, quantity);
     }
 
+    @Override
+    public List<Oder> findByAccountId(Long accountId) {
+        return iOderRepository.findByAccount_AccountId(accountId);
+    }
+
 
 }
+
+
+
+
+

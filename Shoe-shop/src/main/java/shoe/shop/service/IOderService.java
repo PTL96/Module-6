@@ -2,7 +2,9 @@ package shoe.shop.service;
 
 import shoe.shop.dto.oder.OderView;
 import shoe.shop.dto.oder.TotalPrice;
+import shoe.shop.entity.account.Account;
 import shoe.shop.entity.oderProduct.Oder;
+
 
 
 import java.util.List;
@@ -23,4 +25,7 @@ public interface IOderService {
     Oder finByAccountIdProductId(Long accountId, Long productId);
 
     void updateOder(Long id, int quantity);
+
+
+    List<Oder> findByAccountId(Long accountId);
 }

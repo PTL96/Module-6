@@ -3,7 +3,6 @@ package shoe.shop.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import shoe.shop.dto.oder.OderDto;
 import shoe.shop.dto.oder.OderView;
 import shoe.shop.dto.oder.TotalPrice;
+import shoe.shop.entity.account.Account;
 import shoe.shop.entity.oderProduct.Oder;
 import shoe.shop.service.IAccountService;
 import shoe.shop.service.IProductService;
@@ -18,7 +18,6 @@ import shoe.shop.service.impl.OderService;
 
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 
@@ -35,6 +34,7 @@ public class OderController {
 
     @PostMapping("addToCart")
     public ResponseEntity<OderDto> addToCart(@RequestBody OderDto oderDto) {
+
         Long productId = oderDto.getProduct_id();
         Long accountId = oderDto.getAccount_id();
         Oder check = oderService.finByAccountIdProductId(accountId, productId);
@@ -68,33 +68,14 @@ public class OderController {
     }
 
     @GetMapping("update")
-    public ResponseEntity<Oder> update(@RequestParam("id") Long id, @RequestParam("quantity") int quantity){
+    public ResponseEntity<Oder> update(@RequestParam("id") Long id, @RequestParam("quantity") int quantity) {
         Oder oder = oderService.findById(id);
-        if (id == null){
+        if (oder == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         oderService.updateOder(id, quantity);
         return new ResponseEntity<>(oder, HttpStatus.OK);
     }
-
-
-
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Object> updateOderQuantity(@PathVariable Long id, @RequestBody Map<String, Object> payload) {
-//        int quantity = (int) payload.get("quantity");
-//
-//        Optional<Oder> optionalOder = Optional.ofNullable(oderService.findById(id));
-//        if (!optionalOder.isPresent()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        Oder oder = optionalOder.get();
-//        oder.setQuantity(quantity);
-//
-//        oderService.save(oder);
-//
-//        return ResponseEntity.ok().build();
-//    }
 
 
     @DeleteMapping("delete{id}")
@@ -115,4 +96,34 @@ public class OderController {
         }
         return new ResponseEntity<>(totalPrice, HttpStatus.OK);
     }
+
+
+//    @PutMapping("payment/{id}")
+//public ResponseEntity<String> updatePaymentStatus(@PathVariable Long id) {
+//    Optional<Oder> optionalOrder = Optional.ofNullable(oderService.findById(id));
+//    if (optionalOrder.isPresent()) {
+//        Oder order = optionalOrder.get();
+//        order.setPayment(true);
+//        oderService.save(order);
+//        return ResponseEntity.ok("Payment status updated successfully.");
+//    } else {
+//        return ResponseEntity.notFound().build();
+//    }
+//}
+
+
+@PutMapping("/payment/{accountId}")
+    public ResponseEntity<String> updatePaymentStatus(@PathVariable Long accountId) {
+        List<Oder> orders = oderService.findByAccountId(accountId);
+        if (!orders.isEmpty()) {
+            for (Oder order : orders) {
+                order.setPayment(true);
+                oderService.save(order);
+            }
+            return ResponseEntity.ok("Thanh toán thành công");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

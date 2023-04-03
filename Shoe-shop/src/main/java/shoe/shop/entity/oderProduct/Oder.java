@@ -19,6 +19,7 @@ public class Oder {
     private int sizes;
     private int totalPrice;
     private int total;
+    private boolean payment;
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
@@ -119,5 +120,13 @@ public class Oder {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public boolean isPayment() {
+        return payment;
+    }
+
+    public void setPayment(boolean payment) {
+        this.payment = payment;
     }
 }
