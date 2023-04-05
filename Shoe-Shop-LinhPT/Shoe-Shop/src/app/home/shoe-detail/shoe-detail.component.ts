@@ -6,6 +6,9 @@ import {ViewportScroller} from "@angular/common";
 import {SizeService} from "../../service/size.service";
 import {Size} from "../../entity/size";
 import {TokenStorageService} from "../../service/security/token-storage.service";
+import {SecurityService} from "../../service/security/security.service";
+import {ToastrService} from "ngx-toastr";
+import {OderService} from "../../service/oder.service";
 
 @Component({
   selector: 'app-shoe-detail',
@@ -17,6 +20,8 @@ export class ShoeDetailComponent implements OnInit {
   pageYoffSet = 0;
   size: Size[] = [];
   private id = 0;
+  isLoggedIn = false;
+  user: any;
 
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
@@ -24,8 +29,14 @@ export class ShoeDetailComponent implements OnInit {
               private scroll: ViewportScroller,
               private sizeService: SizeService,
               private tokenStorageService: TokenStorageService,
+              private securityService: SecurityService,
+              private toast: ToastrService,
+              private oderService: OderService
   ) {
     this.activatedRoute.paramMap.subscribe(next => {
+      this.securityService.getIsLoggedIn().subscribe(next => {
+        this.isLoggedIn = next;
+      });
       const id = next.get("id");
       if (id != null) {
         this.productService.findById(parseInt(id)).subscribe(data => {
@@ -53,44 +64,31 @@ export class ShoeDetailComponent implements OnInit {
   }
 
 
-  // addTocard(productId: number| undefined, avatar: string| undefined, price: number, productName: string) {
-  //   if (this.tokenStorageService.getCart() != undefined) {
-  //     this.carts = this.tokenStorageService.getCart()
-  //     this.cart.id = productId;
-  //     this.cart.imageProduct = avatar;
-  //     this.cart.price = price
-  //     this.cart.nameProduct = productName
-  //     if (this.tokenStorageService.checkProducName(productName)) {
-  //       this.tokenStorageService.upQuantity(this.id, this.carts)
-  //     } else {
-  //       this.cart.quantitys = 1;
-  //       this.carts.push(this.cart)
-  //       Swal.fire({
-  //         position: 'top',
-  //         icon: 'success',
-  //         title: 'Đã thêm vào giỏ hàng',
-  //         showConfirmButton: false,
-  //         timer: 1000
-  //       })
-  //     }
-  //     this.tokenStorageService.setCart(this.carts)
-  //   } else {
-  //     this.cart.id = productId;
-  //     this.cart.imageProduct = avatar;
-  //     this.cart.price = price
-  //     this.cart.nameProduct = productName
-  //     this.cart.quantitys = 1;
-  //     this.carts.push(this.cart)
-  //     Swal.fire({
-  //       position: 'top',
-  //       icon: 'success',
-  //       title: 'Đã thêm vào giỏ hàng',
-  //       showConfirmButton: false,
-  //       timer: 1000
-  //     })
-  //     this.tokenStorageService.setCart(this.carts)
-  //
-  //   }
-  // }
+  loader() {
+    if (this.isLoggedIn) {
+      this.securityService.getProfile(this.tokenStorageService.getIdAccount()).subscribe(
+        next => this.user = next
+      )
+    }
+  }
+
+  addToCart(product: Product) {
+    if (!this.tokenStorageService.getToken()) {
+      this.toast.warning('Vui lòng đăng nhập', 'Hãy Đăng Nhập', {
+        timeOut: 1000,
+        positionClass: 'toast-top-center',
+      });
+      this.router.navigateByUrl('/security')
+    } else {
+      this.oderService.add(product, 37).subscribe(ok => {
+        this.toast.info('Đã thêm giỏ hàng', 'Đã Thêm', {
+          timeOut: 1000,
+          positionClass: 'toast-top-center',
+        });
+      });
+
+    }
+
+  }
 
 }

@@ -9,7 +9,7 @@
       <th>Giá tiền</th>
     </tr>
     </thead>
-    <tbody *ngIf="oderView.length > 0; else emptyCart">
+    <tbody *ngIf="oderView.length != 0; else emptyCart">
     <tr *ngFor="let temp of oderView | paginate:{itemsPerPage: 5,currentPage:p}, index as i">
       <td>
         <div class="cart-info">
@@ -22,17 +22,15 @@
         </div>
       </td>
       <td>
-
         <input class="quantity" [value]="temp.quantity" #qty type="number" style="width: 50px; height: 30px"  (change)="changeQuantity(temp.oderId, qty.value)">
-
       </td>
       <td>{{temp.totalPrice | number:'1.0-0'}} VNĐ</td>
+
     </tr>
+
     </tbody>
   </table>
-
   <pagination-controls (pageChange)="p=$event"></pagination-controls>
-
   <div class="total-price">
     <table>
       <tr>
@@ -42,13 +40,11 @@
       </tr>
     </table>
   </div>
-
-  <a class="btn1" type="button" style="float: right" routerLink="/cart/payment">Thanh toán</a>
-  <p style="color: red">* Quý khách vui lòng nhập đúng địa chỉ khi thanh toán<br> để thuận tiện cho việc giao hàng !</p>
-
+<div>
+  <button class="btn1" type="button" style="float: right" [disabled]= "oderView.length == 0" [routerLink]="['/cart/payment', idAccount]">Thanh toán</button>
+</div>
 </div>
 <ng-template #emptyCart>
-  <h3 style="color: red; text-align: center">Chưa có sản phẩm nào trong giỏ hàng <span style="font-size: 35px">😢</span>
-  </h3>
-</ng-template>
+
+  <img src="../../../assets/img/empty-cart.png" style="width: 50%; height: 400px; margin-left: 300px"/></ng-template>
 

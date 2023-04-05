@@ -22,9 +22,8 @@ export class HeaderComponent implements OnInit {
   name = "";
   role = '';
   length = 0;
-  count = 0;
   oder: Oder[] = [];
-  idAccount: any;
+  cartItemCount: any;
 
   constructor(private scroll: ViewportScroller,
               private tokenStorageService: TokenStorageService,
@@ -50,6 +49,10 @@ this.oderService.getAll(this.tokenStorageService.getIdAccount()).subscribe(ok=>{
   ngOnInit(): void {
     this.isLoggedIn = this.tokenStorageService.getIsLogged();
     this.loader()
+    this.oderService.getCartItemCount().subscribe(next => {
+      this.cartItemCount = next;
+    });
+
 
   }
 

@@ -11,8 +11,9 @@ p{
   color: #555;
 }
 table{
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
+  margin-left: 5%;
 }
 .cart-info{
   display: flex;
@@ -33,6 +34,7 @@ img{
 td{
   padding: 10px 5px;
   text-align: center;
+  border: 1px solid coral;
 }
 td input{
   width: 45px;
@@ -95,7 +97,7 @@ a{
   display: inline-block;
   background: #FF523b;
   color: #fff;
- margin-right: 10px;
+  margin-right: 10px;
   font-size: small;
   transition: background 0.5s;
   cursor: pointer;
@@ -123,9 +125,20 @@ a{
   width: 50px;
   height: 30px;
 }
-.small-containerabc {
-  max-width: 1080px;
-  margin: auto;
-  padding-left: 25px;
-  padding-right: 25px;
+.titleabc {
+  text-align: center;
+  position: relative;
+  line-height: 60px;
+  color: #555;
+}
+.titleabc:after {
+  content: '';
+  background: #ff523b;
+  width: 80px;
+  height: 5px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }

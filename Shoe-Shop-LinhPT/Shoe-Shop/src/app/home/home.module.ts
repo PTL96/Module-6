@@ -8,10 +8,11 @@ import { FooterComponent } from './footer/footer.component';
 import { ShoeDetailComponent } from './shoe-detail/shoe-detail.component';
 import { ShoeCreateComponent } from './shoe-create/shoe-create.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, BodyComponent, FooterComponent, ShoeDetailComponent, ShoeCreateComponent],
+  declarations: [HeaderComponent, BodyComponent, FooterComponent, ShoeDetailComponent, ShoeCreateComponent, ProfileComponent],
   exports: [
     HeaderComponent,
     FooterComponent

@@ -1,0 +1,37 @@
+
+<div style="min-height: 80vh">
+
+  <div class="small-containerabc" style="margin-top: 50px">
+    <h2 class="titleabc zoom">Lịch Sử Mua Hàng</h2>
+  </div>
+  <a routerLink="/" class="btn" style="float: right; margin-right: 75px" (click)="scrollProductBack()">Mua tiếp</a>
+
+  <table style=" margin-bottom: 30px">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Sản phẩm</th>
+    <th>Số lượng</th>
+    <th>Giá tiền</th>
+    <th>Ngày mua</th>
+  </tr>
+  </thead>
+  <tbody *ngIf="historyDto.length != 0; else emptyCart">
+  <tr *ngFor="let temp of historyDto | paginate:{itemsPerPage: 5,currentPage:p}, index as i">
+    <td>{{i+1}}</td>
+    <td>{{temp.nameProduct}}</td>
+    <td>{{temp.quantity}}</td>
+    <td>{{temp.priceProduct | number:'1.0-0'}} VNĐ</td>
+    <td>{{temp.datePayment}}</td>
+<!--    <td>{{temp.totalPrice | number:'1.0-0'}} VNĐ</td>-->
+  </tr>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p=$event"></pagination-controls>
+</div>
+
+<ng-template #emptyCart>
+  <h3 style="margin-left: 500px; margin-top: 40px; color: red">Bạn chưa mua sản phẩm nào 😢</h3>
+</ng-template>
+
+

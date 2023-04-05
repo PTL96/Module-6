@@ -181,25 +181,7 @@ export class TokenStorageService {
 
 
 
-  //
-  //
-  // checkProducName(productName: string) {
-  //   for (let i = 0; i < this.getCart().length; i++) {
-  //     if (this.getCart()[i].nameProduct == productName) {
-  //       return true
-  //     }
-  //   }
-  //   return false;
-  // }
-  //
-  // upQuantity(id: number, carts: Cart[]) {
-  //   for (let i = 0; i < carts.length; i++) {
-  //     if (carts[i].id == id) {
-  //       carts[i].quantitys += 1;
-  //       break;
-  //     }
-  //   }
-  // }
+
 
 }
 
