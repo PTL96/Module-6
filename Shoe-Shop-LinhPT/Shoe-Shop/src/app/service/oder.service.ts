@@ -6,6 +6,7 @@ import {Product} from "../entity/product";
 import {TokenStorageService} from "./security/token-storage.service";
 import {TotalPrice} from "../entity/total-price";
 import {Account} from "../entity/account/account";
+import {tap} from "rxjs/operators";
 
 const ID_ACCOUNT_KEY = 'Id_Account_key';
 
@@ -21,7 +22,7 @@ export class OderService {
   URL_ACCOUNT = ("http://localhost:8080/api/auth")
 
   private cartItems: Oder[] = [];
-  private cartItemCount = new BehaviorSubject(0);
+  public cartItemCount = new BehaviorSubject(0);
 
   getCart() {
     return this.cartItems;
@@ -31,11 +32,11 @@ export class OderService {
     return this.cartItemCount;
   }
 
-  add(product: Product, size: number): Observable<Oder> {
+  add(product: Product,quantity:any, size: number): Observable<Oder> {
     let oder: Oder = {
       oderId: 0,
       sizes: size,
-      quantity: 1,
+      quantity: quantity,
       priceProduct: product.price,
       productName: product.productName,
       avatar: product.avatar,
@@ -47,6 +48,16 @@ export class OderService {
     return this.httpClient.post<Oder>(this.URL_ODER + '/addToCart', oder);
   }
 
+  delete(id: number | undefined): Observable<Oder> {
+    return this.httpClient.delete<Oder>(this.URL_ODER + '/delete' + id)
+
+    const index = this.cartItems.findIndex(item => item.product_id === id);
+    if (index > -1) {
+      this.cartItems.splice(index, 1);
+    }
+    this.cartItemCount.next(this.cartItemCount.value - 1);
+
+  }
 
   getAll(idAccount: any): Observable<Oder[]> {
 
@@ -57,17 +68,14 @@ export class OderService {
     return this.httpClient.get<TotalPrice>(this.URL_ODER + '/total?idAccount=' + idAccount)
   }
 
-  delete(id: number | undefined): Observable<Oder> {
-    this.cartItemCount.next(this.cartItemCount.value - 1);
-    return this.httpClient.delete<Oder>(this.URL_ODER + '/delete' + id)
-  }
-
 
   update(id: number, quantity: number) {
+
     return this.httpClient.get(this.URL_ODER + '/update?id=' + id + '&quantity=' + quantity)
   }
 
   payment(idAccount: number): Observable<any> {
+    this.cartItemCount = new BehaviorSubject(0);
     return this.httpClient.put(this.URL_ODER + '/payment', {accountId: idAccount})
   }
 

@@ -17,8 +17,7 @@ export class HistoryComponent implements OnInit {
   pageYoffSet = 0;
   constructor(private oderService: OderService,
               private tokenStorageService: TokenStorageService,
-              private scroll: ViewportScroller,
-              private share: ShareService) {
+              private shareService:ShareService) {
   }
 
   ngOnInit(): void {
@@ -26,9 +25,11 @@ export class HistoryComponent implements OnInit {
       this.idAccount = this.tokenStorageService.getIdAccount()
       console.log(this.idAccount)
     }
-
-    window.scrollTo(0,530)
+    this.shareService.getClickEvent().subscribe(next => {
+      this.getAllHistory();
+    })
     this.getAllHistory();
+    window.scrollTo(0,530)
   }
 
   getAllHistory() {

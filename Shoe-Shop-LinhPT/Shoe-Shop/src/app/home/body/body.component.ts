@@ -10,6 +10,7 @@ import {Component, HostListener, OnInit} from "@angular/core";
 import {ViewportScroller} from "@angular/common";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {ProductHot} from "../../entity/product-hot";
 
 
 @Component({
@@ -31,7 +32,8 @@ export class BodyComponent implements OnInit {
   user: any;
   isLoggedIn = false;
   idAccount: any;
-
+  productHot: ProductHot[] = [];
+  checkQuantity = false;
 
   constructor(private productService: ProductService,
               private scroll: ViewportScroller,
@@ -66,6 +68,7 @@ export class BodyComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = this.tokenStorageService.getIsLogged();
     this.getAllProduct(this.size);
+    this.getAllProductHot();
     this.loader()
   }
 
@@ -80,6 +83,7 @@ export class BodyComponent implements OnInit {
         this.size = data.size
         this.first = data.first
         this.last = data.last
+        console.log(data)
       }
     })
   }
@@ -100,17 +104,28 @@ export class BodyComponent implements OnInit {
       });
       this.router.navigateByUrl('/security')
     } else {
-      this.oderService.add(product, 37).subscribe(ok => {
+      this.oderService.add(product, 1, 37).subscribe(ok => {
         this.toast.info('Đã thêm giỏ hàng', 'Đã Thêm', {
           timeOut: 1000,
           positionClass: 'toast-top-center',
         });
+      }, err => {
+        this.checkQuantity = err;
+        this.toast.warning('Hiện tại chúng tôi không đủ hàng', 'Xin lỗi', {
+          timeOut: 2000,
+          positionClass: 'toast-top-center',
+        });
+
       });
-
     }
-
   }
 
+  getAllProductHot() {
+    this.productService.getAllHot().subscribe(data => {
+      this.productHot = data;
+      console.log(this.productHot)
+    })
+  }
 
   scrollProduct() {
     this.scroll.scrollToPosition([0, 1200]);

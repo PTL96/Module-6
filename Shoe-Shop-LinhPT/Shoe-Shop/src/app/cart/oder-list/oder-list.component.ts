@@ -23,13 +23,14 @@ export class OderListComponent implements OnInit {
   p = 0;
   USDTotal: any = 0;
   oderIsEmpty: boolean = false;
+  quantity: number = 1;
 
   constructor(private scroll: ViewportScroller,
               private share: ShareService,
               private tokenStorageService: TokenStorageService,
               private oderService: OderService,
               public toast: ToastrService,
-              ) {
+  ) {
     this.share.getClickEvent().subscribe(next => {
       this.getALlOder();
       this.getTotalPrice();
@@ -44,6 +45,7 @@ export class OderListComponent implements OnInit {
     }
     this.oderService.getAll(this.idAccount).subscribe(data => {
       this.oderView = data;
+      console.log(this.oderView)
       this.oderIsEmpty = this.oderView == null;
 
     })
@@ -60,7 +62,11 @@ export class OderListComponent implements OnInit {
   }
 
   getALlOder() {
+    this.oderService.getAll(this.idAccount).subscribe(data => {
+      this.oderView = data;
+      this.oderIsEmpty = this.oderView == null;
 
+    })
   }
 
   getTotalPrice() {
@@ -82,12 +88,16 @@ export class OderListComponent implements OnInit {
           console.log(this.oderView)
         })
       })
+
+
   }
 
   changeQuantity(oderId: any, qty: string) {
     this.oderService.update(oderId, parseInt(qty)).subscribe(next => {
       this.share.sendClickEvent();
+      this.getALlOder();
     })
 
   }
+
 }

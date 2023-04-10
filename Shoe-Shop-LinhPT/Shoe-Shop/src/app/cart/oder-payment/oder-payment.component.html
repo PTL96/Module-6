@@ -1,9 +1,9 @@
-<div class="container" style="min-height: 120vh; margin-top: 50px">
+<div class="container" style="min-height: 120vh; margin-top: 50px" *ngIf="oderView.length !==0; else emptyCart">
   <div class="title">
     <h2>THÔNG TIN MUA HÀNG</h2>
   </div>
   <div class="d-flex">
-    <form  [formGroup]="updateForm">
+    <form [formGroup]="updateForm">
       <label>
         <input *ngIf="updateForm" type="hidden" formControlName="accountId">
       </label>
@@ -14,32 +14,32 @@
       </label>
 
       <label>
-        <span class="lname">Ngày sinh<span class="required">*</span></span>
-        <input type="date"  style="width: 60%; height: 35px" formControlName="dateOfBirth">
+        <span class="fname">Ngày sinh<span class="required">*</span></span>
+        <input type="date" style="width: 60%; height: 35px" formControlName="dateOfBirth">
       </label>
 
       <label>
-        <span class="lname">CMND/CCCD <span class="required">*</span></span>
+        <span class="fname">CMND/CCCD <span class="required">*</span></span>
         <input *ngIf="updateForm" type="number" style="width: 60%" formControlName="idCard">
       </label>
 
       <label>
-        <span class="lname">Số điện thoại <span class="required">*</span></span>
-        <input *ngIf="updateForm" type="number"  style="width: 60%" formControlName="phoneNumber">
+        <span class="fname">Số điện thoại <span class="required">*</span></span>
+        <input *ngIf="updateForm" type="number" style="width: 60%" formControlName="phoneNumber">
       </label>
 
       <label>
-        <span>Email <span class="required">*</span></span>
-        <input *ngIf="updateForm" type="text"  formControlName="email">
+        <span class="fname">Email <span class="required">*</span></span>
+        <input *ngIf="updateForm" type="text" formControlName="email">
       </label>
 
       <label>
-        <span>Địa chỉ<span class="required">*</span></span>
+        <span class="fname">Địa chỉ<span class="required">*</span></span>
         <textarea *ngIf="updateForm" class="textarea" formControlName="address"></textarea>
       </label>
 
-      <label>
-      <div style="width: 385px; margin-left: 160px" id="myPaypalButtons"></div>
+      <label style="width: 340px; margin-left: 200px">
+        <div id="myPaypalButtons"></div>
       </label>
     </form>
 
@@ -56,11 +56,16 @@
           <td *ngIf="item">{{item.totalPrice| number:'1.0-0'}}VNĐ</td>
         </tr>
         </tbody>
-      </table><br>
+      </table>
+      <br>
       <pagination-controls (pageChange)="p=$event" style="font-size: small"></pagination-controls>
-<h5>Tổng thanh toán:</h5>
-      <p style="color: red">{{USDTotal/23000 | currency:'USD'}}</p>
-<!--      <button type="button">Place Order</button>-->
+      <h5>Tổng thanh toán:</h5>
+      <p style="color: red">{{USDTotal / 23000 | currency:'USD'}}</p>
+      <!--      <button type="button">Place Order</button>-->
     </div>
   </div>
 </div>
+
+<ng-template #emptyCart>
+
+  <img src="../../../assets/img/empty-cart.png" style="width: 50%; height: 400px; margin-left: 400px"/></ng-template>

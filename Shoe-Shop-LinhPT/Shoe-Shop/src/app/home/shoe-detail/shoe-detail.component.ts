@@ -9,6 +9,7 @@ import {TokenStorageService} from "../../service/security/token-storage.service"
 import {SecurityService} from "../../service/security/security.service";
 import {ToastrService} from "ngx-toastr";
 import {OderService} from "../../service/oder.service";
+import {ShareService} from "../../service/security/share.service";
 
 @Component({
   selector: 'app-shoe-detail',
@@ -22,6 +23,7 @@ export class ShoeDetailComponent implements OnInit {
   private id = 0;
   isLoggedIn = false;
   user: any;
+  checkQuantity = false;
 
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
@@ -31,7 +33,8 @@ export class ShoeDetailComponent implements OnInit {
               private tokenStorageService: TokenStorageService,
               private securityService: SecurityService,
               private toast: ToastrService,
-              private oderService: OderService
+              private oderService: OderService,
+              private shareService: ShareService
   ) {
     this.activatedRoute.paramMap.subscribe(next => {
       this.securityService.getIsLoggedIn().subscribe(next => {
@@ -72,19 +75,28 @@ export class ShoeDetailComponent implements OnInit {
     }
   }
 
-  addToCart(product: Product) {
+  addToCart(product: Product, quantity: any) {
     if (!this.tokenStorageService.getToken()) {
       this.toast.warning('Vui lòng đăng nhập', 'Hãy Đăng Nhập', {
         timeOut: 1000,
         positionClass: 'toast-top-center',
       });
       this.router.navigateByUrl('/security')
-    } else {
-      this.oderService.add(product, 37).subscribe(ok => {
+    } else{
+      this.oderService.add(product, quantity, 37).subscribe(ok => {
         this.toast.info('Đã thêm giỏ hàng', 'Đã Thêm', {
           timeOut: 1000,
           positionClass: 'toast-top-center',
         });
+        this.shareService.sendClickEvent()
+        this.router.navigateByUrl('/cart')
+      }, error => {
+        this.checkQuantity = error;
+        this.toast.warning('Số không hợp lệ hoặc hiện tại chúng tôi không đủ hàng', 'Xin lỗi', {
+          timeOut: 2000,
+          positionClass: 'toast-top-center',
+        });
+
       });
 
     }

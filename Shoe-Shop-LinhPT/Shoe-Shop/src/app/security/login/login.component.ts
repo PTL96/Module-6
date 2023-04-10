@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
             positionClass: 'toast-top-center',
           });
           window.scrollTo(0,0)
+          this.shareService.sendClickEvent();
         }, error => {
 
           if(error.status == 406){

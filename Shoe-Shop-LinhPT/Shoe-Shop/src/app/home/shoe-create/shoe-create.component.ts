@@ -1,13 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Category} from "../../entity/category";
-import {Product} from "../../entity/product";
 import {ProductService} from "../../service/product.service";
 import {CategoryService} from "../../service/category.service";
 import {ToastrService} from "ngx-toastr";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {finalize} from "rxjs/operators";
 import {Router} from "@angular/router";
+import {ShareService} from "../../service/security/share.service";
 
 @Component({
   selector: 'app-shoe-create',
@@ -33,7 +33,8 @@ export class ShoeCreateComponent implements OnInit {
               private productService: ProductService,
               private categoryService: CategoryService,
               private toast: ToastrService,
-              private  router: Router) {
+              private  router: Router,
+              private shareService: ShareService) {
     this.categoryService.getAll().subscribe(data => {
       this.category = data;
     });
@@ -69,7 +70,11 @@ export class ShoeCreateComponent implements OnInit {
           console.log(url)
           this.productService.save(product).subscribe(ok => {
 
-
+            this.toast.info('Thêm mới thành công', 'Đã Thêm', {
+              timeOut: 1000,
+              positionClass: 'toast-top-center',
+            });
+            this.shareService.sendClickEvent();
             this.createForm.reset();
           });
         });

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {OderService} from "../../service/oder.service";
 import {render} from "creditcardpayments/creditCardPayments";
 import {TotalPrice} from "../../entity/total-price";
@@ -15,7 +15,7 @@ import {Account} from "../../entity/account/account";
   templateUrl: './oder-payment.component.html',
   styleUrls: ['./oder-payment.component.css']
 })
-export class OderPaymentComponent implements OnInit {
+export class OderPaymentComponent implements OnInit, AfterViewInit {
   totalPrice: TotalPrice = {};
   idAccount: any;
   USDTotal: any = 0;
@@ -23,6 +23,7 @@ export class OderPaymentComponent implements OnInit {
   account: Account = {};
   accountId: any;
   p = 0;
+  isShow = false;
   updateForm = new FormGroup({});
 
   constructor(private oderService: OderService,
@@ -33,6 +34,7 @@ export class OderPaymentComponent implements OnInit {
               private router: Router) {
     this.activatedRoute.paramMap.subscribe(ok => {
       const id = ok.get("id");
+
       if (id != null) {
         this.oderService.findByIdAccount(parseInt(id)).subscribe(next => {
           this.account = next;
@@ -58,7 +60,7 @@ export class OderPaymentComponent implements OnInit {
       this.idAccount = this.tokenStorageService.getIdAccount()
       console.log(this.idAccount)
     }
-    this.getTotalPrice()
+    this.getTotalPrice();
     this.getALlOder()
   }
 
@@ -69,24 +71,7 @@ export class OderPaymentComponent implements OnInit {
       if (ok != null) {
         this.USDTotal = (ok.totalPrice);
       }
-      render(
-        {
-          id: "#myPaypalButtons",
-          currency: "USD",
-          value: (this.USDTotal / 23000).toFixed(2),
-          onApprove: (details) => {
-            this.oderService.payment(this.idAccount).subscribe(next => {
-              this.share.sendClickEvent();
-              console.log(this.idAccount)
-            });
-            this.toast.info('Thanh toán thành công', 'Thành Công', {
-              timeOut: 2000,
-              positionClass: 'toast-top-center',
-            });
-            this.router.navigateByUrl('/cart/history')
-          }
-        }
-      )
+
     });
   }
 
@@ -95,6 +80,48 @@ export class OderPaymentComponent implements OnInit {
       this.oderView = data;
       console.log(this.oderView)
     })
+  }
+
+render() {
+  render(
+    {
+      id: "#myPaypalButtons",
+      currency: "USD",
+      value: (this.USDTotal / 23000).toFixed(2),
+      onApprove: (details) => {
+        this.oderService.payment(this.idAccount).subscribe(next => {
+          console.log(this.idAccount)
+        });
+        this.toast.info('Thanh toán thành công', 'Thành Công', {
+          timeOut: 3000,
+          positionClass: 'toast-top-center',
+        });
+        this.router.navigateByUrl('/cart/history')
+        this.share.sendClickEvent();
+      }
+    }
+  )
+}
+
+
+
+  private loadExternalScript(scriptUrl: string) {
+    return new Promise((resolve, reject) => {
+      const scriptElement = document.createElement('script')
+      scriptElement.src = scriptUrl
+      scriptElement.onload = resolve
+      document.body.appendChild(scriptElement)
+    })
+  }
+
+  ngAfterViewInit(): void {
+    this.loadExternalScript('https://www.paypal.com/sdk/js?client-id=Aet4gqcdYLN7ux-A76cX-nfVNMsJSurHV2r3CaRDoNjVLOPx3h1o1UmIqRYSVUIImvNOvTX65CPEEGni').then(
+      value => {
+        setTimeout(() => {
+          this.render();
+        }, 0);
+      }
+    );
   }
 
 }

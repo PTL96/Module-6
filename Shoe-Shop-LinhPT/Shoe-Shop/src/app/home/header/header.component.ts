@@ -8,6 +8,7 @@ import {OderService} from "../../service/oder.service";
 import {Oder} from "../../entity/oder";
 import firebase from "firebase";
 import User = firebase.User;
+import {ShareService} from "../../service/security/share.service";
 
 @Component({
   selector: 'app-header',
@@ -23,13 +24,14 @@ export class HeaderComponent implements OnInit {
   role = '';
   length = 0;
   oder: Oder[] = [];
-  cartItemCount: any;
+  cartItemCount = 0;
 
   constructor(private scroll: ViewportScroller,
               private tokenStorageService: TokenStorageService,
               private securityService: SecurityService,
               private router: Router,
-              private oderService: OderService) {
+              private oderService: OderService,
+              private shareService: ShareService) {
     this.securityService.getIsLoggedIn().subscribe(next => {
       this.isLoggedIn = next;
     });
@@ -41,9 +43,9 @@ export class HeaderComponent implements OnInit {
       this.role = tokenStorageService.getRole()[0];
       console.log(this.role);
     }
-this.oderService.getAll(this.tokenStorageService.getIdAccount()).subscribe(ok=>{
-  this.oder = ok;
-})
+    this.oderService.getAll(this.tokenStorageService.getIdAccount()).subscribe(ok => {
+      this.oder = ok;
+    })
   }
 
   ngOnInit(): void {
@@ -52,8 +54,13 @@ this.oderService.getAll(this.tokenStorageService.getIdAccount()).subscribe(ok=>{
     this.oderService.getCartItemCount().subscribe(next => {
       this.cartItemCount = next;
     });
-
-
+    this.shareService.getClickEvent().subscribe(next => {
+      this.isLoggedIn = this.tokenStorageService.getIsLogged();
+      this.loader()
+      this.oderService.getCartItemCount().subscribe(next => {
+        this.cartItemCount = next;
+      });
+    })
   }
 
   loader() {
@@ -61,6 +68,7 @@ this.oderService.getAll(this.tokenStorageService.getIdAccount()).subscribe(ok=>{
       this.securityService.getProfile(this.tokenStorageService.getIdAccount()).subscribe(
         next => this.user = next
       )
+      this.role = this.tokenStorageService.getRole()[0];
     }
   }
 
@@ -73,6 +81,7 @@ this.oderService.getAll(this.tokenStorageService.getIdAccount()).subscribe(ok=>{
   }
 
   logout() {
+    this.role = '';
     this.tokenStorageService.logout();
     this.securityService.setIsLoggedIn(null, false);
     this.router.navigateByUrl('/security');

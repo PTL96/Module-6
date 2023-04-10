@@ -10,10 +10,11 @@
 <!--        <option *ngFor="let s of size" [value]="s.sizeId">{{s.sizeNumber}}</option>-->
 <!--      </select>-->
 
-      <input type="number" value="1" style="margin-top: 15px; height: 20px; width: 55px"><br>
-      <a class="btn" routerLink="/cart" (click)="addToCart(temp)">Thêm vào giỏ</a>
+      <input type="number" value="1" #quantity style="margin-top: 15px; height: 30px; width: 70px"><br>
+      <a class="btn" (click)="addToCart(temp,quantity.value)">Thêm vào giỏ</a>
       <a href="" class="btn1" (click)="scrollProduct()">Quay lại</a>
       <h3>{{temp.productName}}</h3>
+      <h5 style="color: #f44336">Đang còn: {{temp.quantity}} sản phẩm</h5>
       <p>{{temp.description}}</p>
     </div>
   </div>

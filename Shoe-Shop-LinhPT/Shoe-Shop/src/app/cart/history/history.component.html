@@ -22,7 +22,7 @@
     <td>{{temp.nameProduct}}</td>
     <td>{{temp.quantity}}</td>
     <td>{{temp.priceProduct | number:'1.0-0'}} VNĐ</td>
-    <td>{{temp.datePayment}}</td>
+    <td>{{temp.datePayment | date: 'dd-MM-yyyy'}}</td>
 <!--    <td>{{temp.totalPrice | number:'1.0-0'}} VNĐ</td>-->
   </tr>
   </tbody>

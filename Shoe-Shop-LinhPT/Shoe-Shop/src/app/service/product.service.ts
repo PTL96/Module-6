@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "../entity/product";
+import {ProductHot} from "../entity/product-hot";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class ProductService {
   }
 
   URL_PRD = ("http://localhost:8080/product")
+  URL_PRD_HOT = ("http://localhost:8080/oder/hot")
 
   getAll(name: string, category: string, size: number): Observable<any> {
     return this.httpClient.get<any>(this.URL_PRD + '?size=' + size + '&name=' + name + '&category=' + category);
@@ -25,7 +27,7 @@ export class ProductService {
     return this.httpClient.get(this.URL_PRD + '/' + id)
   }
 
-  // search( name: string, category: string): Observable<any> {
-  //   return this.httpClient.get<any>(this.URL_PRD );
-  // }
+  getAllHot(): Observable<ProductHot[]>{
+    return this.httpClient.get<ProductHot[]>(this.URL_PRD_HOT)
+  }
 }

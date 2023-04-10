@@ -10,12 +10,12 @@
           <li class="animationTop delay-03"><a routerLink="/">Trang Chủ</a></li>
           <li class="animationTop delay-03"><a routerLink="/">Liên Hệ</a></li>
           <li class="animationTop delay-04"><a routerLink="/cart/history">Lịch Sử Mua Hàng</a></li>
-          <li class="animationTop delay-03"><a routerLink="/home/create" *ngIf="role !='ROLE_CUSTOMER'">Thêm Mới</a></li>
-          <li class="animationTop delay-03"><a routerLink="/home/create" *ngIf="role !='ROLE_CUSTOMER'">Kho Hàng</a></li>
+          <li class="animationTop delay-03"><a routerLink="/home/create" *ngIf="role =='ROLE_ADMIN'">Thêm Mới</a></li>
+          <li class="animationTop delay-03"><a routerLink="/home" *ngIf="role =='ROLE_ADMIN'">Kho Hàng</a></li>
           <li class="animationTop delay-05 "><a routerLink="/security" *ngIf="!isLoggedIn">Đăng Nhập</a></li>
           <li>
             <div class="dropdown" *ngIf="isLoggedIn">
-              <button class="dropbtn">{{user?.name}}</button>
+              <button class="dropbtn">{{user.name}}</button>
               <div class="dropdown-content">
                 <a routerLink="/home/profile">Thông tin cá nhân</a>
                 <a href="#">Đổi mật khẩu</a>
@@ -27,7 +27,7 @@
         </ul>
       </nav>
       <a routerLink="/cart">
-        <div style="position: fixed; color: #f44336; z-index: 1">
+        <div>
           <img src="../../../assets/img/cart.png" width="30px" height="30px" class="animationTop delay-06"  />{{cartItemCount }}
         </div>
       </a>
