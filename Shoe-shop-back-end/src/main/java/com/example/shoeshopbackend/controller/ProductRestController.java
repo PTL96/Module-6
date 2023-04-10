@@ -8,7 +8,6 @@ import com.example.shoeshopbackend.service.impl.CategoryService;
 import com.example.shoeshopbackend.service.impl.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("product")
@@ -75,5 +75,6 @@ public class ProductRestController {
         productService.deleteProduct(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
+
 
 }

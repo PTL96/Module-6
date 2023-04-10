@@ -105,9 +105,6 @@ public class AuthRestController {
     @GetMapping("{id}")
     public ResponseEntity<Account> finById(@PathVariable("id") Long id) {
         Account account = iAccountService.findById(id);
-//        if (account == null) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 }

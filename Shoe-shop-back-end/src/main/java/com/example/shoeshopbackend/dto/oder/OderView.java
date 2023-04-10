@@ -17,6 +17,4 @@ public interface OderView {
 
     double getTotalPrice();
 
-    int getSizes();
-
 }

@@ -3,9 +3,10 @@ package com.example.shoeshopbackend.service.impl;
 import com.example.shoeshopbackend.dto.oder.HistoryDto;
 import com.example.shoeshopbackend.dto.oder.OderView;
 import com.example.shoeshopbackend.dto.oder.TotalPrice;
+import com.example.shoeshopbackend.dto.product.HotProductDto;
 import com.example.shoeshopbackend.entity.Oder;
+import com.example.shoeshopbackend.entity.Product;
 import com.example.shoeshopbackend.repository.IOderRepository;
-import com.example.shoeshopbackend.repository.IProductRepository;
 import com.example.shoeshopbackend.service.IOderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,7 @@ import java.util.List;
 public class OderService implements IOderService {
     @Autowired
     private IOderRepository iOderRepository;
-    @Autowired
-    private IProductRepository iProductRepository;
+
 
     @Override
     public void save(Oder oder) {
@@ -44,9 +44,6 @@ public class OderService implements IOderService {
 
     @Override
     public void deleteOder(Long id) {
-//        Oder oder = this.findById(id);
-//        oder.setFlag_delete(true);
-//        iOderRepository.save(oder);
         iOderRepository.deleteById(id);
     }
 
@@ -67,14 +64,17 @@ public class OderService implements IOderService {
 
     @Override
     public void savePayment(Oder order) {
-//        order.setQuantity(0);
-//        order.setTotalPrice(0);
         iOderRepository.save(order);
     }
 
     @Override
     public List<HistoryDto> getallHistory(Long idAccount) {
         return iOderRepository.getHistory(idAccount);
+    }
+
+    @Override
+    public List<HotProductDto> getAllHot() {
+        return iOderRepository.hotProduct();
     }
 
 

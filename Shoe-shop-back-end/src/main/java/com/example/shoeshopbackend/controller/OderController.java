@@ -4,6 +4,8 @@ import com.example.shoeshopbackend.dto.oder.HistoryDto;
 import com.example.shoeshopbackend.dto.oder.OderDto;
 import com.example.shoeshopbackend.dto.oder.OderView;
 import com.example.shoeshopbackend.dto.oder.TotalPrice;
+import com.example.shoeshopbackend.dto.product.HotProductDto;
+import com.example.shoeshopbackend.entity.Product;
 import com.example.shoeshopbackend.entity.account.Account;
 import com.example.shoeshopbackend.entity.Oder;
 import com.example.shoeshopbackend.service.IAccountService;
@@ -16,7 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -36,19 +39,27 @@ public class OderController {
         Long productId = oderDto.getProduct_id();
         Long accountId = oderDto.getAccount_id();
         Oder check = oderService.finByAccountIdProductId(accountId, productId);
+        Product product = iProductService.findByIdProduct(oderDto.getProduct_id());
         if (check != null) {
+            if (product.getQuantity() < oderDto.getQuantity() + check.getQuantity()) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
             check.setQuantity(check.getQuantity() + oderDto.getQuantity());
             oderService.save(check);
         } else {
+            if (product.getQuantity() < oderDto.getQuantity() || oderDto.getQuantity()<=0) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
             Oder oder = new Oder();
-            BeanUtils.copyProperties(oderDto, oder);
             oderDto.setQuantity(oderDto.getQuantity());
+            BeanUtils.copyProperties(oderDto, oder);
             oder.setAccount(iAccountService.findById(oderDto.getAccount_id()));
             oder.setProduct(iProductService.findByIdProduct(oderDto.getProduct_id()));
             oder.setSizes(oderDto.getSizes());
             oder.setPriceProduct(oderDto.getPriceProduct());
             oder.setNameProduct(oderDto.getProductName());
             oder.setAvatarProduct(oderDto.getAvatar());
+
             oderService.save(oder);
         }
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -76,6 +87,7 @@ public class OderController {
         if (oder == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
         oderService.deleteOder(id);
         return new ResponseEntity<>(oder, HttpStatus.OK);
     }
@@ -95,8 +107,11 @@ public class OderController {
         List<Oder> orders = oderService.findByAccountId(account.getAccountId());
         if (!orders.isEmpty()) {
             for (Oder order : orders) {
+                Product product = iProductService.findByIdProduct(order.getProduct().getProductId());
+                product.setQuantity(product.getQuantity() - order.getQuantity());
+                iProductService.save(product);
                 order.setPayment(true);
-                order.setDatePayment(String.valueOf(LocalDate.now()));
+                order.setDatePayment(String.valueOf(LocalDateTime.now()));
                 oderService.savePayment(order);
             }
             return ResponseEntity.ok("Thanh toán thành công");
@@ -114,16 +129,10 @@ public class OderController {
         return new ResponseEntity<>(historyDtoList, HttpStatus.OK);
     }
 
-    //    @PutMapping("payment/{id}")
-//public ResponseEntity<String> updatePaymentStatus(@PathVariable Long id) {
-//    Optional<Oder> optionalOrder = Optional.ofNullable(oderService.findById(id));
-//    if (optionalOrder.isPresent()) {
-//        Oder order = optionalOrder.get();
-//        order.setPayment(true);
-//        oderService.save(order);
-//        return ResponseEntity.ok("Payment status updated successfully.");
-//    } else {
-//        return ResponseEntity.notFound().build();
-//    }
-//}
+    @GetMapping("/hot")
+    public ResponseEntity<List<HotProductDto>> getAll() {
+        List<HotProductDto> hotProductDtoList = oderService.getAllHot();
+        return new ResponseEntity<>(hotProductDtoList, HttpStatus.OK);
+    }
+
 }

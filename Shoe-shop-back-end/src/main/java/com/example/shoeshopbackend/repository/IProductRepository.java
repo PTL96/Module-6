@@ -21,13 +21,13 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
             "                     INNER JOIN category ON p.category_id = category.category_id\n" +
             "                     INNER JOIN ware_house on p.product_id = ware_house.product_id\n" +
             "            where flag_delete = true and category_name like concat('%',:category,'%')\n" +
-            "               and p.product_name like concat('%', :name, '%')",
+            "               and p.product_name like concat('%', :name, '%') order by p.product_id desc",
             countQuery = "SELECT product_name as productName, category_name as categoryName, quantitys\n" +
                     "                    FROM `product` as p\n" +
                     "                           INNER JOIN category ON p.category_id = category.category_id\n" +
                     "                           INNER JOIN ware_house on p.product_id = ware_house.product_id\n" +
                     "                    where flag_delete = true and category_name like concat('%',:category,'%')\n" +
-                    "   and p.product_name like concat('%',:name,'%')", nativeQuery = true)
+                    "   and p.product_name like concat('%',:name,'%') order by p.product_id desc", nativeQuery = true)
     Page<ProductView> findAllPage(@Param("name") String name, @Param("category") String category, Pageable pageable);
 
 }

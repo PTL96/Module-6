@@ -13,4 +13,5 @@ public interface HistoryDto {
     int getTotalPrice();
 
     String getDatePayment();
+    String getAddress();
 }

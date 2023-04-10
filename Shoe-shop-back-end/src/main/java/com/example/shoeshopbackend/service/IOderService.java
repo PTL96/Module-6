@@ -4,6 +4,7 @@ package com.example.shoeshopbackend.service;
 import com.example.shoeshopbackend.dto.oder.HistoryDto;
 import com.example.shoeshopbackend.dto.oder.OderView;
 import com.example.shoeshopbackend.dto.oder.TotalPrice;
+import com.example.shoeshopbackend.dto.product.HotProductDto;
 import com.example.shoeshopbackend.entity.Oder;
 
 import java.util.List;
@@ -31,4 +32,6 @@ public interface IOderService {
     void savePayment(Oder order);
 
    List<HistoryDto> getallHistory(Long idAccount);
+
+    List<HotProductDto> getAllHot();
 }
