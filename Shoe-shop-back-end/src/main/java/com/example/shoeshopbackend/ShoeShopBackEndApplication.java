@@ -10,7 +10,7 @@ public class ShoeShopBackEndApplication {
     public static void main(String[] args) {
         SpringApplication.run(ShoeShopBackEndApplication.class, args);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println(passwordEncoder.encode("147258"));
+        System.out.println(passwordEncoder.encode("123"));
     }
     }
 

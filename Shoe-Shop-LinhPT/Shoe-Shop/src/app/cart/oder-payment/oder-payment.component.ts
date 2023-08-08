@@ -60,6 +60,7 @@ export class OderPaymentComponent implements OnInit, AfterViewInit {
       this.idAccount = this.tokenStorageService.getIdAccount()
       console.log(this.idAccount)
     }
+
     this.getTotalPrice();
     this.getALlOder()
   }

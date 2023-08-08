@@ -18,7 +18,9 @@ export class HistoryComponent implements OnInit {
   constructor(private oderService: OderService,
               private tokenStorageService: TokenStorageService,
               private shareService:ShareService) {
+    this.shareService.getClickEvent()
   }
+
 
   ngOnInit(): void {
     if (this.tokenStorageService.getToken()) {
@@ -37,6 +39,7 @@ export class HistoryComponent implements OnInit {
       this.historyDto = data;
       console.log(data)
     })
+    this.shareService.sendClickEvent()
   }
 
 

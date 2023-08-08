@@ -1,0 +1,32 @@
+.formabc{
+  background: #fff;
+  width: 400px;
+  display: flex;
+  border: 1px solid #ff523b;
+  height: 35px;
+}
+.formabc input{
+  flex: 1;
+  border: none;
+  outline: none;
+}
+.formabc button{
+  background: tomato;
+  padding: 0 20px;
+  border: none;
+  color: #fff;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: block;
+}
+.formabc .fa-sharp{
+  align-self: center;
+  padding: 10px 10px;
+  color: #777;
+}
+.formabc .mnb{
+  align-self: center;
+  padding: 10px 10px;
+  color: #777;
+  border: none;
+}

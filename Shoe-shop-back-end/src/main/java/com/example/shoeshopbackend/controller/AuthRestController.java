@@ -36,7 +36,6 @@ public class AuthRestController {
     private IAccountService iAccountService;
     @Autowired
     private IRoleService iRoleService;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
